@@ -1,8 +1,4 @@
 # Harjoitustyö
 
-Tässä normaalia tekstiä. Voin kirjoittaa *kursivoidusti* tai **lihavoidusti**
-
-[gitlog.txt](https://github.com/oonarauhala/ot-harjoitustyo/blob/master/laskarit/viikko1/gitlog.txt)
-Jos tässä ei ole linkkiä tree-tiedostoon, en saanut vielä lupaa melkkiin :]
-
-:]
+[Vaatimusmäärittely](https://github.com/oonarauhala/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
+[Työaikakirjanpito](https://github.com/oonarauhala/ot-harjoitustyo/blob/master/dokumentaatio/ty%C3%B6aikakirjanpito.md)
