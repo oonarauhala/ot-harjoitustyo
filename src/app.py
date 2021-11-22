@@ -1,6 +1,7 @@
 import pygame
 import sys
 
+from entities.display_manager import DisplayManager
 from entities.pet_sprite import PetSprite
 from entities.pet import Pet
 
@@ -8,19 +9,14 @@ from entities.pet import Pet
 class App:
     def __init__(self):
         pygame.init()
-        pygame.display.set_caption("Gacha pet")
         resolution = (450, 840)
-        self.window = pygame.display.set_mode(resolution)
+        self.display_manager = DisplayManager(pygame.display.set_mode(resolution))
         self.dog_images = ["src/media/dog1.png"]
         self.images = []
         self.current_image = 0
         self.pet = Pet("Pottu", "dog")
 
     def run(self):
-        # Init window
-        self.window.fill((0, 0, 0))
-        pygame.display.flip()
-
         # Load images
         self.load_images(self.dog_images)
         self.current_image = 0
@@ -39,8 +35,8 @@ class App:
                     position = event.pos
                     if sprite.rect.collidepoint(position):
                         print("Woof!")
-            pygame.display.flip()
-            sprite_group.draw(self.window)
+            self.display_manager.update()
+            sprite_group.draw(self.display_manager.window)
 
     def load_images(self, images: list):
         for url in images:
