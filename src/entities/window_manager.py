@@ -6,3 +6,6 @@ class WindowManager:
 
     def fill(self, colour):
         self.window.fill(colour)
+
+    def show_pet(self, image):
+        self.window.blit(image, (200, 100))
