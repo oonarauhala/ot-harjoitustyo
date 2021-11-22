@@ -1,5 +1,7 @@
 import pygame
 import sys
+
+from entities.pet_sprite import PetSprite
 from entities.pet import Pet
 
 
@@ -12,7 +14,6 @@ class App:
         self.dog_images = ["src/media/dog1.png"]
         self.images = []
         self.current_image = 0
-        pygame.display.flip()
         self.pet = Pet("Pottu", "dog")
 
     def run(self):
@@ -22,9 +23,13 @@ class App:
 
         # Load images
         self.load_images(self.dog_images)
-        self.window.blit(self.images[0], (110, 260))
         self.current_image = 0
-        pygame.display.flip()
+
+        # Create sprite
+        image = self.images[0]
+        sprite = PetSprite(225, 420, image)
+        sprite_group = pygame.sprite.Group()
+        sprite_group.add(sprite)
 
         while True:
             for event in pygame.event.get():
@@ -32,9 +37,8 @@ class App:
                     sys.exit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     position = event.pos
-                    rect = self.images[self.current_image].get_rect()
-                    if rect.collidepoint(position):
-                        print("Woof!")
+            pygame.display.flip()
+            sprite_group.draw(self.window)
 
     def load_images(self, images: list):
         for url in images:
