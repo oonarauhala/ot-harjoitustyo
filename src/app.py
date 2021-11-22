@@ -37,6 +37,8 @@ class App:
                     sys.exit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     position = event.pos
+                    if sprite.rect.collidepoint(position):
+                        print("Woof!")
             pygame.display.flip()
             sprite_group.draw(self.window)
 
