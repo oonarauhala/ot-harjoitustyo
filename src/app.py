@@ -4,6 +4,8 @@ import sys
 from entities.display_manager import DisplayManager
 from entities.pet_sprite import PetSprite
 from entities.pet import Pet
+from entities.user_repository import UserRepository
+from entities.user import User
 
 
 class App:
@@ -15,6 +17,8 @@ class App:
         self.images = []
         self.current_image = 0
         self.pet = Pet("Pottu", "dog")
+        # TODO load user from db
+        self.user = User()
 
     def run(self):
         # Load images
@@ -35,6 +39,9 @@ class App:
                     position = event.pos
                     if sprite.rect.collidepoint(position):
                         print("Woof!")
+                        if self.pet.is_hungry():
+                            # TODO display hunger on screen
+                            self.user.feed_pet(self.pet)
             self.display_manager.update()
             sprite_group.draw(self.display_manager.window)
 
