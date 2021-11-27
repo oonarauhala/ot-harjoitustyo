@@ -2,10 +2,11 @@ import pygame
 import sys
 
 from entities.display_manager import DisplayManager
-from entities.pet_sprite import PetSprite
+from entities.pet_sprite import GameSprite
 from entities.pet import Pet
 from entities.user_repository import UserRepository
 from entities.user import User
+from entities.image_loader import imageLoader
 
 
 class App:
@@ -13,21 +14,23 @@ class App:
         pygame.init()
         resolution = (450, 840)
         self.display_manager = DisplayManager(pygame.display.set_mode(resolution))
-        self.dog_images = ["src/media/dog1.png"]
-        self.images = []
-        self.current_image = 0
+        self.image_loader = imageLoader()
+        self.loaded_sprite_images = []
+        self.loaded_ui_images = []
+        self.current_sprite_image = 0
+        # TODO ask user per info
         self.pet = Pet("Pottu", "dog")
         # TODO load user from db
         self.user = User()
 
     def run(self):
         # Load images
-        self.load_images(self.dog_images)
-        self.current_image = 0
+        self.loaded_ui_images = self.image_loader.load_ui_images()
+        self.loaded_sprite_images = self.image_loader.load_dog_sprite_images()
+        self.current_sprite_image = 0
 
-        # Create sprite
-        image = self.images[0]
-        sprite = PetSprite(225, 420, image)
+        # Create dog sprite
+        sprite = GameSprite(225, 420, self.loaded_sprite_images[0])
         sprite_group = pygame.sprite.Group()
         sprite_group.add(sprite)
 
@@ -37,14 +40,13 @@ class App:
                     sys.exit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     position = event.pos
+                    # Click sprite
                     if sprite.rect.collidepoint(position):
                         print("Woof!")
                         if self.pet.is_hungry():
                             # TODO display hunger on screen
                             self.user.feed_pet(self.pet)
+                    # Click gacha button
+
             self.display_manager.update()
             sprite_group.draw(self.display_manager.window)
-
-    def load_images(self, images: list):
-        for url in images:
-            self.images.append(pygame.image.load(url))
