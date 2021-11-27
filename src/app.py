@@ -2,7 +2,7 @@ import pygame
 import sys
 
 from entities.display_manager import DisplayManager
-from entities.pet_sprite import GameSprite
+from entities.game_sprite import GameSprite
 from entities.pet import Pet
 from entities.user_repository import UserRepository
 from entities.user import User
@@ -31,8 +31,11 @@ class App:
 
         # Create dog sprite
         sprite = GameSprite(225, 420, self.loaded_sprite_images[0])
+        # Create gacha button sprite
+        play_button_sprite = GameSprite(390, 40, self.loaded_ui_images[1])
         sprite_group = pygame.sprite.Group()
         sprite_group.add(sprite)
+        sprite_group.add(play_button_sprite)
 
         while True:
             for event in pygame.event.get():
@@ -47,6 +50,8 @@ class App:
                             # TODO display hunger on screen
                             self.user.feed_pet(self.pet)
                     # Click gacha button
+                    if play_button_sprite.rect.collidepoint(position):
+                        print("Toimii")
 
             self.display_manager.update()
             sprite_group.draw(self.display_manager.window)

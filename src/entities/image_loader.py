@@ -1,6 +1,6 @@
 import pygame
 
-UI_IMAGES = ["src/media/gacha1.png"]
+UI_IMAGES = ["src/media/gacha1.png", "src/media/playbutton.png"]
 DOG_SPRITE_IMAGES = ["src/media/dog1.png"]
 
 
