@@ -5,7 +5,7 @@ DOG_SPRITE_IMAGES = ["src/media/dog1.png"]
 
 
 class imageLoader:
-    def load_dog_sprite_images(self):
+    def load_dog_images(self):
         loaded_sprite_images = []
         for url in DOG_SPRITE_IMAGES:
             loaded_sprite_images.append(pygame.image.load(url))
