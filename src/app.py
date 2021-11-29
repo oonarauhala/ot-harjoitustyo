@@ -22,11 +22,7 @@ class App:
         self.user = User()
 
     def run(self):
-        self.current_sprite_image = 0
-        # Create sprites
-        self.ui_sprites = self.display_manager.create_ui_sprites()
-        self.pet_sprites = self.display_manager.create_pet_sprites()
-
+        self.initialise_game()
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -37,10 +33,18 @@ class App:
                     if self.pet_sprites[0].rect.collidepoint(position):
                         print("Woof!")
                         if self.pet.is_hungry():
-                            # TODO display hunger on screen
-                            self.user.feed_pet(self.pet)
+                            self.feed_pet()
                     # Click gacha button
                     if self.ui_sprites[0].rect.collidepoint(position):
                         print("Toimii")
 
-            self.display_manager.update()
+    def initialise_game(self):
+        self.current_sprite_image = 0
+        self.ui_sprites = self.display_manager.create_ui_sprites()
+        self.pet_sprites = self.display_manager.create_pet_sprites()
+        self.display_manager.display_hunger(self.pet.hunger)
+
+    def feed_pet(self):
+        self.user.feed_pet(self.pet)
+        self.display_manager.display_hunger(self.pet.hunger)
+        print(self.pet.hunger)
