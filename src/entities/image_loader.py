@@ -4,7 +4,7 @@ UI_IMAGES = ["src/media/gacha1.png", "src/media/playbutton.png"]
 DOG_SPRITE_IMAGES = ["src/media/dog1.png"]
 
 
-class imageLoader:
+class ImageLoader:
     def load_dog_images(self):
         loaded_sprite_images = []
         for url in DOG_SPRITE_IMAGES:

@@ -3,4 +3,3 @@
 **/htmlcov
 **/.pytest_cache
 devkuvat/
-.pylintrc

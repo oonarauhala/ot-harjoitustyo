@@ -1,4 +1,3 @@
-from sys import displayhook
 import pygame
 from entities.game_sprite import GameSprite
 
@@ -8,13 +7,11 @@ class DisplayManager:
         self.window = window
         self.width = window.get_width()
         self.height = window.get_height()
+        self.pet_sprite_group = []
+        self.ui_sprite_group = []
         self.image_loader = image_loader
         self.font = pygame.font.SysFont("Arial", 20)
-
-    def init_window(self, resolution):
         pygame.display.set_caption("Gacha pet")
-        self.window.fill((0, 0, 0))
-        pygame.display.flip()
 
     def update(self):
         self.window.fill((0, 0, 0))

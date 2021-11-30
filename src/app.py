@@ -1,11 +1,9 @@
-import pygame
 import sys
-
+import pygame
 from entities.display_manager import DisplayManager
 from entities.pet import Pet
-from entities.user_repository import UserRepository
 from entities.user import User
-from entities.image_loader import imageLoader
+from entities.image_loader import ImageLoader
 
 
 class App:
@@ -13,12 +11,12 @@ class App:
         pygame.init()
         resolution = (450, 840)
         self.display_manager = DisplayManager(
-            pygame.display.set_mode(resolution), imageLoader()
+            pygame.display.set_mode(resolution), ImageLoader()
         )
         self.current_sprite_image = 0
-        # TODO ask user per info
+        self.ui_sprites = []
+        self.pet_sprites = []
         self.pet = Pet("Pottu", "dog")
-        # TODO load user from db
         self.user = User()
 
     def run(self):
@@ -47,4 +45,3 @@ class App:
     def feed_pet(self):
         self.user.feed_pet(self.pet)
         self.display_manager.display_hunger(self.pet.hunger)
-        print(self.pet.hunger)
