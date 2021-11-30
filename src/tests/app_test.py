@@ -7,4 +7,4 @@ class TestApp(unittest.TestCase):
         self.app = App()
 
     def test_app_init(self):
-        self.assertEqual(self.app.ui_sprites, [])
+        self.assertEqual(self.app.sprites, [])

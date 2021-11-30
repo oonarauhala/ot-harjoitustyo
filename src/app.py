@@ -13,8 +13,7 @@ class App:
         self.display_manager = DisplayManager(
             pygame.display.set_mode(resolution), ImageLoader()
         )
-        self.ui_sprites = []
-        self.pet_sprites = []
+        self.sprites = []
         self.pet = Pet("Pottu", "dog")
         self.user = User()
         self.view = 1
@@ -29,12 +28,11 @@ class App:
                     if event.type == pygame.MOUSEBUTTONDOWN:
                         position = event.pos
                         # Click sprite
-                        if self.pet_sprites[0].rect.collidepoint(position):
-                            print("Woof!")
+                        if self.sprites[0].rect.collidepoint(position):
                             if self.pet.is_hungry():
                                 self.feed_pet()
                         # Click gacha button
-                        if self.ui_sprites[0].rect.collidepoint(position):
+                        if self.sprites[1].rect.collidepoint(position):
                             self.change_view(2)
             if self.view == 2:
                 for event in pygame.event.get():
@@ -48,13 +46,13 @@ class App:
     def change_view(self, view):
         self.kill_all_sprites()
         if view == 1:
-            self.ui_sprites = self.display_manager.create_view_1_ui_sprites()
-            self.pet_sprites = self.display_manager.create_pet_sprites()
+            self.sprites = self.display_manager.create_view_1_sprites()
             self.display_manager.display_hunger(self.pet.hunger)
+            self.view = 1
         if view == 2:
-            self.sprites = self.display_manager.change_to_gacha_view_()
+            self.sprites = self.display_manager.create_view_2_sprites()
+            self.display_manager.change_to_gacha_view_()
             self.view = 2
 
     def kill_all_sprites(self):
-        self.pet_sprites = []
-        self.ui_sprites = []
+        self.sprites = []
