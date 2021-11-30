@@ -1,0 +1,1 @@
+![Arkkitehtuuri](/dokumentaatio/kuvat/uml-1.png)
