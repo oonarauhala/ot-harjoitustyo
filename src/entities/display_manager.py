@@ -34,7 +34,6 @@ class DisplayManager:
         loaded_images = self.image_loader.load_view_images(2)
         gacha_sprite = GameSprite(225, 420, loaded_images[0])
         self.sprite_group = pygame.sprite.Group()
-        self.sprite_group = pygame.sprite.Group()
         self.sprite_group.add(gacha_sprite)
         sprite_list.append(gacha_sprite)
         return sprite_list

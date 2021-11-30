@@ -1,6 +1,5 @@
 import sys
 import pygame
-
 from entities.display_manager import DisplayManager
 from entities.pet import Pet
 from entities.user import User
@@ -28,7 +27,7 @@ class App:
                         sys.exit()
                     if event.type == pygame.MOUSEBUTTONDOWN:
                         position = event.pos
-                        # Click sprite
+                        # Click pet sprite
                         if self.sprites[0].rect.collidepoint(position):
                             if self.pet.is_hungry():
                                 self.feed_pet()
@@ -39,6 +38,11 @@ class App:
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         sys.exit()
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                        position = event.pos
+                        # Click gacha
+                        if self.sprites[0].rect.collidepoint(position):
+                            print("Gacha")
 
     def feed_pet(self):
         self.user.feed_pet(self.pet)
