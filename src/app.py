@@ -1,5 +1,6 @@
 import sys
 import pygame
+
 from entities.display_manager import DisplayManager
 from entities.pet import Pet
 from entities.user import User
