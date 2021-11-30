@@ -1,4 +1,3 @@
-from sys import displayhook
 import pygame
 from entities.game_sprite import GameSprite
 
