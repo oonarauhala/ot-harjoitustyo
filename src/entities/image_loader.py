@@ -2,6 +2,7 @@ import pygame
 
 UI_IMAGES = ["src/media/gacha1.png", "src/media/playbutton.png"]
 DOG_SPRITE_IMAGES = ["src/media/dog1.png"]
+VIEW_2_IMAGES = ["src/media/gacha1.png"]
 
 
 class ImageLoader:
@@ -16,3 +17,9 @@ class ImageLoader:
         for url in UI_IMAGES:
             loaded_ui_images.append(pygame.image.load(url))
         return loaded_ui_images
+
+    def load_view_2_images(self):
+        loaded_images = []
+        for url in VIEW_2_IMAGES:
+            loaded_images.append(pygame.image.load(url))
+        return loaded_images

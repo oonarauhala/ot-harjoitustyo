@@ -28,6 +28,17 @@ class DisplayManager:
         ui_sprite_list.append(play_button_sprite)
         return ui_sprite_list
 
+    def create_view_2_sprites(self):
+        sprite_list = []
+        loaded_images = self.image_loader.load_view_2_images()
+        gacha_sprite = GameSprite(225, 420, loaded_images[0])
+        self.ui_sprite_group = pygame.sprite.Group()
+        # Empty self.pet_sprite_group =
+        self.pet_sprite_group = pygame.sprite.Group()
+        self.ui_sprite_group.add(gacha_sprite)
+        sprite_list.append(gacha_sprite)
+        return sprite_list
+
     def create_pet_sprites(self):
         pet_sprite_list = []
         loaded_pet_images = self.image_loader.load_dog_images()
@@ -44,5 +55,6 @@ class DisplayManager:
         pygame.display.flip()
 
     def change_to_gacha_view_(self):
-        self.window.fill((0, 0, 0))
-        pygame.display.flip()
+        sprites = self.create_view_2_sprites()
+        self.update()
+        return sprites

@@ -52,7 +52,7 @@ class App:
             self.pet_sprites = self.display_manager.create_pet_sprites()
             self.display_manager.display_hunger(self.pet.hunger)
         if view == 2:
-            self.display_manager.change_to_gacha_view_()
+            self.sprites = self.display_manager.change_to_gacha_view_()
             self.view = 2
 
     def kill_all_sprites(self):
