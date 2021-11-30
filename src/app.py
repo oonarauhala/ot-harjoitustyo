@@ -1,6 +1,7 @@
 import sys
 import pygame
 from entities.display_manager import DisplayManager
+from entities.item_machine import ItemMachine
 from entities.pet import Pet
 from entities.user import User
 from entities.image_loader import ImageLoader
@@ -13,6 +14,7 @@ class App:
         self.display_manager = DisplayManager(
             pygame.display.set_mode(resolution), ImageLoader()
         )
+        self.item_machine = ItemMachine()
         self.sprites = []
         self.pet = Pet("Pottu", "dog")
         self.user = User()
@@ -42,11 +44,16 @@ class App:
                         position = event.pos
                         # Click gacha
                         if self.sprites[0].rect.collidepoint(position):
-                            print("Gacha")
+                            self.play_gacha()
 
     def feed_pet(self):
         self.user.feed_pet(self.pet)
         self.display_manager.display_hunger(self.pet.hunger)
+
+    def play_gacha(self):
+        item = self.item_machine.generate_item()
+        self.user.recieve_item(item)
+        self.display_manager.display_gacha_get_item(item)
 
     def change_view(self, view):
         self.kill_all_sprites()

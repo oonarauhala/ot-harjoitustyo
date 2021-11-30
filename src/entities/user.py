@@ -7,3 +7,9 @@ class User:
         self.food -= 1
         if pet.is_hungry():
             pet.eat()
+
+    def recieve_item(self, item):
+        if item == "food":
+            self.food += 1
+        elif item == "money":
+            self.money += 1

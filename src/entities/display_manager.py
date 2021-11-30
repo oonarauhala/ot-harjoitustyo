@@ -1,3 +1,4 @@
+from sys import displayhook
 import pygame
 from entities.game_sprite import GameSprite
 
@@ -42,6 +43,12 @@ class DisplayManager:
         self.update()
         text = self.font.render(f"Hunger: {amount}", True, (255, 255, 255))
         self.window.blit(text, (50, 50))
+        pygame.display.flip()
+
+    def display_gacha_get_item(self, item):
+        self.update()
+        text = self.font.render(f"You got {item}!", True, (255, 255, 255))
+        self.window.blit(text, (150, 100))
         pygame.display.flip()
 
     def change_to_gacha_view_(self):
