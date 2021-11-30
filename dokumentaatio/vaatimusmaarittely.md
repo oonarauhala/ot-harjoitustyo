@@ -10,7 +10,7 @@ Pelissä on käytössä virtuaalivaluutta.
 * Pelaaja voi rekisteröityä sovellukseen
 * Pelaaja voi kirjautua sisään ja ulos sovelluksesta
 * Pelaaja voi luoda lemmikin tililleen
-* Pelaaja voi hankkia lemmikille ruokaa ja tavaroita automaateista
+* Pelaaja voi hankkia lemmikille ruokaa ja tavaroita automaateista (tehty)
 * Pelaaja voi ruokkia lemmikkiä (tehty)
 * Lemmikin nälkäisyys lisääntyy tietyssä ajassa
 

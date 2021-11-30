@@ -6,4 +6,5 @@ Päivä   | Aika (h)| Tehty työ
 23.11 | 1 | Lisää coverage task, lemmikin ruokinta ja README
 27.11 | 2 | Refaktoroi koodia käyttöliittymä/logiikka jakoon, lisää pelaa-nappula
 29.11 | 1 | Refaktoroi koodia ja näytä lemmikin nälkäisyys
-TOTAL | 12 |
+30.11 | 4 | Lisää testejä ja implementoi gachan pelaaminen (+CI yritys)
+TOTAL | 16 |
