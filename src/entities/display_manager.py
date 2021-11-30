@@ -19,7 +19,7 @@ class DisplayManager:
         self.ui_sprite_group.draw(self.window)
         pygame.display.flip()
 
-    def create_ui_sprites(self):
+    def create_view_1_ui_sprites(self):
         ui_sprite_list = []
         loaded_ui_images = self.image_loader.load_ui_images()
         play_button_sprite = GameSprite(390, 40, loaded_ui_images[1])
@@ -43,5 +43,6 @@ class DisplayManager:
         self.window.blit(text, (50, 50))
         pygame.display.flip()
 
-    def change_view_(self, sprites):
-        pass
+    def change_to_gacha_view_(self):
+        self.window.fill((0, 0, 0))
+        pygame.display.flip()
