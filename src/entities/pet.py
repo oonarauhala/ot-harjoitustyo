@@ -4,8 +4,11 @@ class Pet:
         self.animal_type = animal_type
         self.hunger = 3
 
-    def get_type(self):
+    def get_animal_type(self):
         return self.animal_type
 
     def is_hungry(self):
         return True if self.hunger > 0 else False
+
+    def eat(self):
+        self.hunger -= 1
