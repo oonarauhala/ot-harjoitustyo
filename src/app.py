@@ -45,6 +45,9 @@ class App:
                         # Click gacha
                         if self.sprites[0].rect.collidepoint(position):
                             self.play_gacha()
+                        # Click arrow
+                        if self.sprites[1].rect.collidepoint(position):
+                            self.change_view(1)
 
     def feed_pet(self):
         self.user.feed_pet(self.pet)

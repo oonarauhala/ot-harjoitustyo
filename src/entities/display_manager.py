@@ -33,9 +33,12 @@ class DisplayManager:
         sprite_list = []
         loaded_images = self.image_loader.load_view_images(2)
         gacha_sprite = GameSprite(225, 420, loaded_images[0])
+        arrow_sprite = GameSprite(40, 40, loaded_images[1])
         self.sprite_group = pygame.sprite.Group()
         self.sprite_group.add(gacha_sprite)
+        self.sprite_group.add(arrow_sprite)
         sprite_list.append(gacha_sprite)
+        sprite_list.append(arrow_sprite)
         return sprite_list
 
     def display_hunger(self, amount):
