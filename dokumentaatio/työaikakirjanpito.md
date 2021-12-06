@@ -8,4 +8,5 @@ Päivä   | Aika (h)| Tehty työ
 29.11 | 1 | Refaktoroi koodia ja näytä lemmikin nälkäisyys
 30.11 | 4 | Lisää testejä ja implementoi gachan pelaaminen (+CI yritys)
 5.12 | 1 | Lisää takaisin -nuoli gacha-sivulle
-TOTAL | 17 |
+6.12 | 2 | Näytön päivitys järkevästi toimimaan, ulkonäkö
+TOTAL | 19 |
