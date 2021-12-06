@@ -14,7 +14,6 @@ class DisplayManager:
         pygame.display.set_caption("Gacha pet")
 
     def update_view_1(self, user, pet):
-        # self.window.fill((0, 0, 0))
         self.set_background()
         self.sprite_group.draw(self.window)
         self.display_money(user)
@@ -39,7 +38,7 @@ class DisplayManager:
         loaded_images = self.image_loader.load_view_images(1)
         dog_sprite = GameSprite(225, 420, loaded_images[0])
         play_button_sprite = GameSprite(390, 40, loaded_images[1])
-        coin_sprite = GameSprite(40, 800, loaded_images[2])
+        coin_sprite = GameSprite(40, 805, loaded_images[2])
         self.sprite_group = pygame.sprite.Group()
         self.sprite_group.add(dog_sprite)
         self.sprite_group.add(play_button_sprite)
@@ -54,7 +53,7 @@ class DisplayManager:
         loaded_images = self.image_loader.load_view_images(2)
         gacha_sprite = GameSprite(225, 420, loaded_images[0])
         arrow_sprite = GameSprite(40, 40, loaded_images[1])
-        coin_sprite = GameSprite(40, 800, loaded_images[2])
+        coin_sprite = GameSprite(40, 805, loaded_images[2])
         self.sprite_group = pygame.sprite.Group()
         self.sprite_group.add(gacha_sprite)
         self.sprite_group.add(arrow_sprite)
@@ -66,11 +65,11 @@ class DisplayManager:
 
     def display_money(self, user):
         text = self.font.render(str(user.money), True, (255, 255, 255))
-        self.window.blit(text, (65, 790))
+        self.window.blit(text, (65, 795))
 
     def display_hunger(self, pet):
         text = self.font.render(f"Hunger: {pet.hunger}", True, (255, 255, 255))
-        self.window.blit(text, (50, 50))
+        self.window.blit(text, (140, 795))
 
     def display_gacha(self, item):
         text = self.font.render(f"You got {item}!", True, (255, 255, 255))
