@@ -14,7 +14,8 @@ class DisplayManager:
         pygame.display.set_caption("Gacha pet")
 
     def update_view_1(self, user, pet):
-        self.window.fill((0, 0, 0))
+        # self.window.fill((0, 0, 0))
+        self.set_background()
         self.sprite_group.draw(self.window)
         self.display_money(user)
         self.display_hunger(pet)
@@ -74,3 +75,7 @@ class DisplayManager:
     def display_gacha(self, item):
         text = self.font.render(f"You got {item}!", True, (255, 255, 255))
         self.window.blit(text, (150, 100))
+
+    def set_background(self):
+        image = self.image_loader.load_background()
+        self.window.blit(image, (0, 0))

@@ -14,3 +14,6 @@ class ImageLoader:
             for url in VIEW_2_IMAGES:
                 loaded_images.append(pygame.image.load(url))
         return loaded_images
+
+    def load_background(self):
+        return pygame.image.load("src/media/garden.png")
