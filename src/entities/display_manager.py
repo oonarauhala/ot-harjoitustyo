@@ -15,26 +15,21 @@ class DisplayManager:
     def update_view_1(self, user, pet):
         self.window.fill((0, 0, 0))
         self.sprite_group.draw(self.window)
-        text = self.font.render(f"Money: {user.money}", True, (255, 255, 255))
-        self.window.blit(text, (50, 800))
-        text = self.font.render(f"Hunger: {pet.hunger}", True, (255, 255, 255))
-        self.window.blit(text, (50, 50))
+        self.display_money(user)
+        self.display_hunger(pet)
         pygame.display.flip()
 
     def update_view_2(self, user):
         self.window.fill((0, 0, 0))
         self.sprite_group.draw(self.window)
-        text = self.font.render(f"Money: {user.money}", True, (255, 255, 255))
-        self.window.blit(text, (50, 800))
+        self.display_money(user)
         pygame.display.flip()
 
     def update_view_2_with_gacha(self, user, item):
         self.window.fill((0, 0, 0))
         self.sprite_group.draw(self.window)
-        text = self.font.render(f"Money: {user.money}", True, (255, 255, 255))
-        self.window.blit(text, (50, 800))
-        text = self.font.render(f"You got {item}!", True, (255, 255, 255))
-        self.window.blit(text, (150, 100))
+        self.display_money(user)
+        self.display_gacha(item)
         pygame.display.flip()
 
     def create_view_1_sprites(self):
@@ -60,3 +55,15 @@ class DisplayManager:
         sprite_list.append(gacha_sprite)
         sprite_list.append(arrow_sprite)
         return sprite_list
+
+    def display_money(self, user):
+        text = self.font.render(f"Money: {user.money}", True, (255, 255, 255))
+        self.window.blit(text, (50, 800))
+
+    def display_hunger(self, pet):
+        text = self.font.render(f"Hunger: {pet.hunger}", True, (255, 255, 255))
+        self.window.blit(text, (50, 50))
+
+    def display_gacha(self, item):
+        text = self.font.render(f"You got {item}!", True, (255, 255, 255))
+        self.window.blit(text, (150, 100))
