@@ -7,6 +7,9 @@ class DisplayManager:
         self.window = window
         self.width = window.get_width()
         self.height = window.get_height()
+        self.text_surface = pygame.Surface(
+            (self.width, self.height), pygame.SRCALPHA, 32
+        )
         self.sprite_group = []
         self.image_loader = image_loader
         self.font = pygame.font.SysFont("Arial", 20)
@@ -14,6 +17,7 @@ class DisplayManager:
 
     def update(self):
         self.window.fill((0, 0, 0))
+        self.reset_text_surface()
         self.sprite_group.draw(self.window)
         pygame.display.flip()
 
@@ -50,10 +54,16 @@ class DisplayManager:
     def display_gacha_get_item(self, item):
         self.update()
         text = self.font.render(f"You got {item}!", True, (255, 255, 255))
-        self.window.blit(text, (150, 100))
+        self.text_surface.blit(text, (150, 100))
+        self.window.blit(self.text_surface, (0, 0))
         pygame.display.flip()
 
     def change_to_gacha_view_(self):
         sprites = self.create_view_2_sprites()
         self.update()
         return sprites
+
+    def reset_text_surface(self):
+        self.text_surface = pygame.Surface(
+            (self.width, self.height), pygame.SRCALPHA, 32
+        )
