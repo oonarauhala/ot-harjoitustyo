@@ -51,22 +51,22 @@ class App:
 
     def feed_pet(self):
         self.user.feed_pet(self.pet)
-        self.display_manager.display_hunger(self.pet.hunger)
+        self.display_manager.update_view_1(self.user, self.pet)
 
     def play_gacha(self):
         item = self.item_machine.generate_item()
         self.user.recieve_item(item)
-        self.display_manager.display_gacha_get_item(item)
+        self.display_manager.update_view_2_with_gacha(self.user, item)
 
     def change_view(self, view):
         self.kill_all_sprites()
         if view == 1:
             self.sprites = self.display_manager.create_view_1_sprites()
-            self.display_manager.display_hunger(self.pet.hunger)
+            self.display_manager.update_view_1(self.user, self.pet)
             self.view = 1
         if view == 2:
             self.sprites = self.display_manager.create_view_2_sprites()
-            self.display_manager.change_to_gacha_view_()
+            self.display_manager.update_view_2(self.user)
             self.view = 2
 
     def kill_all_sprites(self):
