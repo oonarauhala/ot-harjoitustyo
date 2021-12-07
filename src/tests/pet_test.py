@@ -27,3 +27,7 @@ class TestPet(unittest.TestCase):
         user.feed_pet(self.pet)
         user.feed_pet(self.pet)
         self.assertEqual(self.pet.is_hungry(), False)
+
+    def test_pet_gets_hungrier(self):
+        self.pet.get_hungrier()
+        self.assertEqual(self.pet.hunger, 4)
