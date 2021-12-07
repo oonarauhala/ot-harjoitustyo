@@ -1,7 +1,17 @@
 import pygame
 
-VIEW_1_IMAGES = ["src/media/dog1.png", "src/media/playbutton.png", "src/media/coin.png"]
-VIEW_2_IMAGES = ["src/media/gacha1.png", "src/media/arrow.png", "src/media/coin.png"]
+VIEW_1_IMAGES = [
+    "src/media/dog1.png",
+    "src/media/playbutton.png",
+    "src/media/coin.png",
+    "src/media/food.png",
+]
+VIEW_2_IMAGES = [
+    "src/media/gacha1.png",
+    "src/media/arrow.png",
+    "src/media/coin.png",
+    "src/media/food.png",
+]
 
 
 class ImageLoader:
