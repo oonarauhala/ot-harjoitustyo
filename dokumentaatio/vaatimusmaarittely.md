@@ -10,11 +10,11 @@ Pelissä on käytössä virtuaalivaluutta.
 * Pelaaja voi rekisteröityä sovellukseen
 * Pelaaja voi kirjautua sisään ja ulos sovelluksesta
 * Pelaaja voi luoda lemmikin tililleen
-* Pelaaja voi hankkia lemmikille ruokaa ja tavaroita automaateista (tehty)
-* Pelaaja voi ruokkia lemmikkiä (tehty)
-* Lemmikin nälkäisyys lisääntyy tietyssä ajassa
+* Pelaaja voi hankkia lemmikille ruokaa ja tavaroita automaateista (tehty, viikko 4)
+* Pelaaja voi ruokkia lemmikkiä (tehty, viikko 4)
+* Lemmikin nälkäisyys lisääntyy tietyssä ajassa (tehty, viikko 5)
 
-### Teknisiä vaatimuksia ja suummitelmia
+### Teknisiä vaatimuksia ja suunnitelmia
 
 * Sovelluksen tulee toimia laitoksen koneilla (Linux)
 * Sovellus käyttää Googlen Firebase -palvelua tiedon säilöntään
