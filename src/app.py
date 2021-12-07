@@ -61,9 +61,12 @@ class App:
         self.display_manager.update_view_1(self.user, self.pet)
 
     def play_gacha(self):
-        item = self.item_machine.generate_item()
-        self.user.recieve_item(item)
-        self.display_manager.update_view_2_with_gacha(self.user, item)
+        if self.user.pay():
+            item = self.item_machine.generate_item()
+            self.user.recieve_item(item)
+            self.display_manager.update_view_2_with_gacha(self.user, item)
+        else:
+            self.display_manager.update_view_2_with_gacha_unsuccessful(self.user)
 
     def change_view(self, view):
         self.kill_all_sprites()

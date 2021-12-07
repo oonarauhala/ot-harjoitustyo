@@ -1,5 +1,4 @@
 import pygame
-from pygame import sprite
 from entities.game_sprite import GameSprite
 
 
@@ -34,6 +33,14 @@ class DisplayManager:
         self.display_money(user)
         self.display_gacha(item)
         self.display_food(user)
+        pygame.display.flip()
+
+    def update_view_2_with_gacha_unsuccessful(self, user):
+        self.window.fill((0, 0, 0))
+        self.sprite_group.draw(self.window)
+        self.display_money(user)
+        self.display_food(user)
+        self.display_no_money_message()
         pygame.display.flip()
 
     def create_view_1_sprites(self):
@@ -87,6 +94,10 @@ class DisplayManager:
     def display_food(self, user):
         text = self.font.render(str(user.food), True, (255, 255, 255))
         self.window.blit(text, (215, 795))
+
+    def display_no_money_message(self):
+        text = self.font.render("Not enough money", True, (255, 255, 255))
+        self.window.blit(text, (150, 100))
 
     def set_background(self):
         image = self.image_loader.load_background()

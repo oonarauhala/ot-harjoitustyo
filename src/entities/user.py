@@ -13,3 +13,9 @@ class User:
             self.food += 1
         elif item == "money":
             self.money += 1
+
+    def pay(self):
+        if self.money > 0:
+            self.money -= 1
+            return True
+        return False
