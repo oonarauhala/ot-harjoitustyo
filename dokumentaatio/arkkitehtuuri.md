@@ -10,5 +10,6 @@ Sovelluslogiikkan toteuttavat luokat User, Pet, ItemMachine ja HungerGenerator.
 ## Päätoiminnallisuudet
 
 ### Lemmikin ruokinta
-Käyttäjä voi ruokkia lemmikkiään klikkaamalla sitä.
+Käyttäjä voi ruokkia lemmikkiään klikkaamalla sitä.  
+
 ![Lemmikin ruokinta](/dokumentaatio/kuvat/sekvenssi1.png)
