@@ -9,4 +9,5 @@ Päivä   | Aika (h)| Tehty työ
 30.11 | 4 | Lisää testejä ja implementoi gachan pelaaminen (+CI yritys)
 5.12 | 1 | Lisää takaisin -nuoli gacha-sivulle
 6.12 | 2 | Näytön päivitys järkevästi toimimaan, ulkonäkö
-TOTAL | 19 |
+7.12 | 3.5 | Lisää testejä ja pieniä toiminnallikuuksia (esim. gacha maksaa)
+TOTAL | 22.5 |
