@@ -12,3 +12,6 @@ class Pet:
 
     def eat(self):
         self.hunger -= 1
+
+    def get_hungrier(self):
+        self.hunger += 1
