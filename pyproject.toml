@@ -10,6 +10,8 @@ invoke = "^1.6.0"
 pygame = "^2.1.0"
 pytest = "^6.2.5"
 coverage = "^6.1.2"
+python-firebase = "^1.2"
+requests = "^2.26.0"
 
 [tool.poetry.dev-dependencies]
 pylint = "^2.12.1"
