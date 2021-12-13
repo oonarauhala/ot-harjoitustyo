@@ -10,4 +10,5 @@ Päivä   | Aika (h)| Tehty työ
 5.12 | 1 | Lisää takaisin -nuoli gacha-sivulle
 6.12 | 2 | Näytön päivitys järkevästi toimimaan, ulkonäkö
 7.12 | 3.5 | Lisää testejä ja pieniä toiminnallikuuksia (esim. gacha maksaa)
-TOTAL | 22.5 |
+13.12 | 5 | Aloita firebase tietokantayhteys ja sisäänkirjautuminen
+TOTAL | 27.5 |
