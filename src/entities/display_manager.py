@@ -27,6 +27,12 @@ class DisplayManager:
         self.display_food(user)
         pygame.display.flip()
 
+    def update_view_3(self, username_box, password_box):
+        self.window.fill((0, 0, 0))
+        username_box.draw(self.window)
+        password_box.draw(self.window)
+        pygame.display.flip()
+
     def update_view_2_with_gacha(self, user, item):
         self.window.fill((0, 0, 0))
         self.sprite_group.draw(self.window)

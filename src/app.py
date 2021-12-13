@@ -6,12 +6,16 @@ from entities.pet import Pet
 from entities.user import User
 from entities.image_loader import ImageLoader
 from entities.hunger_generator import HungerGenerator
+from entities.input_box import InputBox
 
 
 class App:
     def __init__(self):
         pygame.init()
+        pygame.key.set_repeat(200, 25)
         resolution = (450, 840)
+        self.username_input_box = InputBox(130, 200, 200, 40)
+        self.password_input_box = InputBox(130, 300, 200, 40)
         self.display_manager = DisplayManager(
             pygame.display.set_mode(resolution), ImageLoader()
         )
@@ -21,10 +25,10 @@ class App:
         self.sprites = []
         self.pet = Pet("Pottu", "dog")
         self.user = User()
-        self.view = 1
+        self.view = 0
 
     def run(self):
-        self.change_view(1)
+        self.change_view(3)
         while True:
             if self.view == 1:
                 for event in pygame.event.get():
@@ -51,6 +55,18 @@ class App:
                         # Click arrow
                         if self.sprites[1].rect.collidepoint(position):
                             self.change_view(1)
+            if self.view == 3:
+                self.display_manager.update_view_3(
+                    self.username_input_box, self.password_input_box
+                )
+                for event in pygame.event.get():
+                    self.username_input_box.handle_event(event)
+                    self.password_input_box.handle_event(event)
+                    if event.type == pygame.QUIT:
+                        sys.exit()
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                        position = event.pos
+
             if self.hunger_generator.generate_hunger() and self.view == 1:
                 self.pet.get_hungrier()
                 self.display_manager.update_view_1(self.user, self.pet)
@@ -78,6 +94,11 @@ class App:
             self.sprites = self.display_manager.create_view_2_sprites()
             self.display_manager.update_view_2(self.user)
             self.view = 2
+        if view == 3:
+            self.display_manager.update_view_3(
+                self.username_input_box, self.password_input_box
+            )
+            self.view = 3
 
     def kill_all_sprites(self):
         self.sprites = []

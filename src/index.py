@@ -3,7 +3,7 @@ from entities.user_repository import UserRepository
 
 
 def main():
-    users = UserRepository()
+    # users = UserRepository()
     user = {
         "username": "Kayttajanimi",
         "password": "salasana",
