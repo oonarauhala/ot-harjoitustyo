@@ -1,5 +1,6 @@
 class User:
     def __init__(self):
+        nimi = ""
         self.food = 5
         self.money = 5
 

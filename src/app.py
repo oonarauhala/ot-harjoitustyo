@@ -7,6 +7,10 @@ from entities.user import User
 from entities.image_loader import ImageLoader
 from entities.hunger_generator import HungerGenerator
 from entities.input_box import InputBox
+from entities.button import Button
+
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
 
 
 class App:
@@ -16,6 +20,7 @@ class App:
         resolution = (450, 840)
         self.username_input_box = InputBox(130, 200, 200, 40)
         self.password_input_box = InputBox(130, 300, 200, 40)
+        self.login_button = Button("Login", 0, 0, BLACK, WHITE)
         self.display_manager = DisplayManager(
             pygame.display.set_mode(resolution), ImageLoader()
         )
@@ -57,15 +62,20 @@ class App:
                             self.change_view(1)
             if self.view == 3:
                 self.display_manager.update_view_3(
-                    self.username_input_box, self.password_input_box
+                    self.username_input_box, self.password_input_box, self.login_button
                 )
                 for event in pygame.event.get():
                     self.username_input_box.handle_event(event)
                     self.password_input_box.handle_event(event)
+                    # self.login_button.click(event)
                     if event.type == pygame.QUIT:
                         sys.exit()
                     if event.type == pygame.MOUSEBUTTONDOWN:
                         position = event.pos
+                        if self.login_button.get_rect().collidepoint(position):
+                            username = self.username_input_box.get_text()
+                            password = self.password_input_box.get_text()
+                            self.user.nimi = username
 
             if self.hunger_generator.generate_hunger() and self.view == 1:
                 self.pet.get_hungrier()
@@ -96,7 +106,7 @@ class App:
             self.view = 2
         if view == 3:
             self.display_manager.update_view_3(
-                self.username_input_box, self.password_input_box
+                self.username_input_box, self.password_input_box, self.login_button
             )
             self.view = 3
 
