@@ -5,6 +5,7 @@ VIEW_1_IMAGES = [
     "src/media/playbutton.png",
     "src/media/coin.png",
     "src/media/food.png",
+    "src/media/logout_white.png",
 ]
 VIEW_2_IMAGES = [
     "src/media/gacha1.png",

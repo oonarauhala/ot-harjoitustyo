@@ -118,6 +118,10 @@ class App:
                 self.user_repository.user
             )
 
+    def logout(self):
+        self.user_repository.logout()
+        self.change_view(3)
+
     def change_view(self, view):
         self.kill_all_sprites()
         if view == 1:

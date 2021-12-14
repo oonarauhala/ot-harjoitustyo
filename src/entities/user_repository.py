@@ -31,3 +31,6 @@ class UserRepository:
             self.user.set_user_data(username, password, items)
             return True
         return False
+
+    def logout(self):
+        self.user = User()
