@@ -34,9 +34,7 @@ class InputBox:
                     self.text = self.text[:-1]
                 else:
                     self.text += event.unicode
-                self.text_surface = pygame.font.Font(None, 32).render(
-                    self.text, True, self.text_colour
-                )
+                self.reset_surface()
 
     def draw(self, window):
         window.blit(self.text_surface, (self.rect.x + 5, self.rect.y + 10))
@@ -44,3 +42,12 @@ class InputBox:
 
     def get_text(self):
         return self.text
+
+    def reset(self):
+        self.text = ""
+        self.reset_surface()
+
+    def reset_surface(self):
+        self.text_surface = pygame.font.Font(None, 32).render(
+            self.text, True, self.text_colour
+        )

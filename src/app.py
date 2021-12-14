@@ -50,6 +50,8 @@ class App:
                         # Click gacha button
                         if self.sprites[1].rect.collidepoint(position):
                             self.change_view(2)
+                        if self.sprites[4].rect.collidepoint(position):
+                            self.logout()
             elif self.view == 2:
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
@@ -120,6 +122,9 @@ class App:
 
     def logout(self):
         self.user_repository.logout()
+        self.username_input_box.reset()
+        self.password_input_box.reset()
+        self.login_error = False
         self.change_view(3)
 
     def change_view(self, view):
