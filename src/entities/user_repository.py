@@ -3,12 +3,13 @@ from entities.user import User
 
 
 class UserRepository:
-    def __init__(self):
+    def __init__(self, validator):
         self.db = firebase.FirebaseApplication(
             "https://gachapet-77d0f-default-rtdb.europe-west1.firebasedatabase.app/",
             None,
         )
         self.user = User()
+        self.validator = validator
         # result = self.db.get("/", None)
         # print(result)
 
@@ -22,8 +23,9 @@ class UserRepository:
         # print(users)
 
     def login(self, username, password):
-        # Placeolder if
-        if len(password) > 0:
+        if self.validator.validate_string(username) and self.validator.validate_string(
+            password
+        ):
             # Placeholder items data until firebase operations ready
             items = {"food": 6, "money": 10}
             self.user.set_user_data(username, password, items)

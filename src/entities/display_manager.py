@@ -2,6 +2,8 @@ import pygame
 from entities.game_sprite import GameSprite
 
 VIEW_3_BG_COLOUR = (84, 183, 166)
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
 
 
 class DisplayManager:
@@ -13,6 +15,9 @@ class DisplayManager:
         self.image_loader = image_loader
         self.font = pygame.font.SysFont("Arial", 20)
         pygame.display.set_caption("Gacha pet")
+
+    def flip(self):
+        pygame.display.flip()
 
     def update_view_1(self, user, pet):
         self.set_background()
@@ -30,13 +35,21 @@ class DisplayManager:
         self.display_food(user)
         pygame.display.flip()
 
-    def update_view_3(self, username_box, password_box, login_button):
+    def _view_3(self, username_box, password_box, login_button):
         self.window.fill(VIEW_3_BG_COLOUR)
         username_box.draw(self.window)
         password_box.draw(self.window)
         login_button.draw(self.window)
         self.display_logo()
-        pygame.display.flip()
+
+    def update_view_3(self, username_box, password_box, login_button):
+        self._view_3(username_box, password_box, login_button)
+        self.flip()
+
+    def update_view_3_with_error(self, username_box, password_box, login_button):
+        self._view_3(username_box, password_box, login_button)
+        self.display_login_error()
+        self.flip()
 
     def update_view_2_with_gacha(self, user, item):
         self.window.fill((0, 0, 0))
@@ -121,3 +134,7 @@ class DisplayManager:
     def display_logo(self):
         logo = self.image_loader.load_logo()
         self.window.blit(logo, (25, 50))
+
+    def display_login_error(self):
+        text = self.font.render("Incorrect username or password", True, BLACK)
+        self.window.blit(text, (100, 360))
