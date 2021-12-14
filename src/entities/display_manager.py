@@ -46,12 +46,25 @@ class DisplayManager:
         self.display_username(user.name)
         pygame.display.flip()
 
-    def update_view_2(self, user):
+    def _view_2(self, user):
         self.window.fill((0, 0, 0))
         self.sprite_group.draw(self.window)
         self.display_money(user)
         self.display_food(user)
-        pygame.display.flip()
+
+    def update_view_2(self, user):
+        self._view_2(user)
+        self.flip()
+
+    def update_view_2_with_gacha(self, user, item):
+        self._view_2(user)
+        self.display_gacha(item)
+        self.flip()
+
+    def update_view_2_with_gacha_unsuccessful(self, user):
+        self._view_2(user)
+        self.display_no_money_message()
+        self.flip()
 
     def _view_3(self, username_box, password_box, login_button):
         self.window.fill(VIEW_3_BG_COLOUR)
@@ -68,22 +81,6 @@ class DisplayManager:
         self._view_3(username_box, password_box, login_button)
         self.display_login_error()
         self.flip()
-
-    def update_view_2_with_gacha(self, user, item):
-        self.window.fill((0, 0, 0))
-        self.sprite_group.draw(self.window)
-        self.display_money(user)
-        self.display_gacha(item)
-        self.display_food(user)
-        pygame.display.flip()
-
-    def update_view_2_with_gacha_unsuccessful(self, user):
-        self.window.fill((0, 0, 0))
-        self.sprite_group.draw(self.window)
-        self.display_money(user)
-        self.display_food(user)
-        self.display_no_money_message()
-        pygame.display.flip()
 
     def create_view_1_sprites(self):
         sprite_list = []
@@ -113,18 +110,15 @@ class DisplayManager:
         arrow_sprite = GameSprite(40, 40, loaded_images[1])
         coin_sprite = GameSprite(40, 805, loaded_images[2])
         food_sprite = GameSprite(160, 805, loaded_images[3])
-        logout_sprite = GameSprite(400, 805, loaded_images[4])
         self.sprite_group = pygame.sprite.Group()
         self.sprite_group.add(gacha_sprite)
         self.sprite_group.add(arrow_sprite)
         self.sprite_group.add(coin_sprite)
         self.sprite_group.add(food_sprite)
-        self.sprite_group.add(logout_sprite)
         sprite_list.append(gacha_sprite)
         sprite_list.append(arrow_sprite)
         sprite_list.append(coin_sprite)
         sprite_list.append(food_sprite)
-        sprite_list.append(logout_sprite)
         return sprite_list
 
     def display_money(self, user):

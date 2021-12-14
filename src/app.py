@@ -38,6 +38,7 @@ class App:
         self.change_view(3)
         while True:
             if self.view == 1:
+
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         sys.exit()
@@ -50,8 +51,11 @@ class App:
                         # Click gacha button
                         if self.sprites[1].rect.collidepoint(position):
                             self.change_view(2)
-                        if self.sprites[4].rect.collidepoint(position):
-                            self.logout()
+                        try:
+                            if self.sprites[4].rect.collidepoint(position):
+                                self.logout()
+                        except:
+                            pass
             elif self.view == 2:
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
@@ -131,6 +135,7 @@ class App:
         self.kill_all_sprites()
         if view == 1:
             self.sprites = self.display_manager.create_view_1_sprites()
+            print(self.sprites)
             self.display_manager.update_view_1(self.user_repository.user, self.pet)
             self.view = 1
         if view == 2:
