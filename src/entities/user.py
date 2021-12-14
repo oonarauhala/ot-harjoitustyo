@@ -1,6 +1,6 @@
 class User:
     def __init__(self):
-        self.nimi = ""
+        self.name = ""
         self.password = ""
         self.food = 5
         self.money = 5
@@ -23,7 +23,7 @@ class User:
         return False
 
     def set_user_data(self, username, password, items):
-        self.nimi = username
+        self.name = username
         self.password = password
         self.food = items["food"]
         self.money = items["money"]

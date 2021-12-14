@@ -3,7 +3,6 @@ import pygame
 from entities.display_manager import DisplayManager
 from entities.item_machine import ItemMachine
 from entities.pet import Pet
-from entities.user import User
 from entities.image_loader import ImageLoader
 from entities.hunger_generator import HungerGenerator
 from entities.input_box import InputBox
@@ -30,7 +29,6 @@ class App:
         self.hunger_generator = HungerGenerator()
         self.sprites = []
         self.pet = Pet("Pottu", "dog")
-        self.user = User()
         self.user_repository = UserRepository()
         self.view = 0
 
@@ -77,36 +75,40 @@ class App:
                         if self.login_button.get_rect().collidepoint(position):
                             username = self.username_input_box.get_text()
                             password = self.password_input_box.get_text()
-                            self.user.nimi = username
+                            self.user_repository.user.name = username
                             if self.user_repository.login(username, password):
                                 self.change_view(1)
 
             if self.hunger_generator.generate_hunger() and self.view == 1:
                 self.pet.get_hungrier()
-                self.display_manager.update_view_1(self.user, self.pet)
+                self.display_manager.update_view_1(self.user_repository.user, self.pet)
             self.clock.tick(30)
 
     def feed_pet(self):
-        self.user.feed_pet(self.pet)
-        self.display_manager.update_view_1(self.user, self.pet)
+        self.user_repository.user.feed_pet(self.pet)
+        self.display_manager.update_view_1(self.user_repository.user, self.pet)
 
     def play_gacha(self):
-        if self.user.pay():
+        if self.user_repository.user.pay():
             item = self.item_machine.generate_item()
-            self.user.recieve_item(item)
-            self.display_manager.update_view_2_with_gacha(self.user, item)
+            self.user_repository.user.recieve_item(item)
+            self.display_manager.update_view_2_with_gacha(
+                self.user_repository.user, item
+            )
         else:
-            self.display_manager.update_view_2_with_gacha_unsuccessful(self.user)
+            self.display_manager.update_view_2_with_gacha_unsuccessful(
+                self.user_repository.user
+            )
 
     def change_view(self, view):
         self.kill_all_sprites()
         if view == 1:
             self.sprites = self.display_manager.create_view_1_sprites()
-            self.display_manager.update_view_1(self.user, self.pet)
+            self.display_manager.update_view_1(self.user_repository.user, self.pet)
             self.view = 1
         if view == 2:
             self.sprites = self.display_manager.create_view_2_sprites()
-            self.display_manager.update_view_2(self.user)
+            self.display_manager.update_view_2(self.user_repository.user)
             self.view = 2
         if view == 3:
             self.display_manager.update_view_3(

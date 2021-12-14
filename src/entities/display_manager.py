@@ -18,6 +18,7 @@ class DisplayManager:
         self.display_money(user)
         self.display_hunger(pet)
         self.display_food(user)
+        self.display_username(user.name)
         pygame.display.flip()
 
     def update_view_2(self, user):
@@ -105,6 +106,10 @@ class DisplayManager:
     def display_no_money_message(self):
         text = self.font.render("Not enough money", True, (255, 255, 255))
         self.window.blit(text, (150, 100))
+
+    def display_username(self, username):
+        text = self.font.render(username, True, (0, 0, 0))
+        self.window.blit(text, (20, 20))
 
     def set_background(self):
         image = self.image_loader.load_background()
