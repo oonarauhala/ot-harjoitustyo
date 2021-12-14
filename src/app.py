@@ -8,6 +8,7 @@ from entities.image_loader import ImageLoader
 from entities.hunger_generator import HungerGenerator
 from entities.input_box import InputBox
 from entities.button import Button
+from entities.user_repository import UserRepository
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -30,6 +31,7 @@ class App:
         self.sprites = []
         self.pet = Pet("Pottu", "dog")
         self.user = User()
+        self.user_repository = UserRepository()
         self.view = 0
 
     def run(self):
@@ -76,6 +78,8 @@ class App:
                             username = self.username_input_box.get_text()
                             password = self.password_input_box.get_text()
                             self.user.nimi = username
+                            if self.user_repository.login(username, password):
+                                self.change_view(1)
 
             if self.hunger_generator.generate_hunger() and self.view == 1:
                 self.pet.get_hungrier()
