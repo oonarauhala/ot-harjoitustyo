@@ -135,7 +135,6 @@ class App:
         self.kill_all_sprites()
         if view == 1:
             self.sprites = self.display_manager.create_view_1_sprites()
-            print(self.sprites)
             self.display_manager.update_view_1(self.user_repository.user, self.pet)
             self.view = 1
         if view == 2:
