@@ -1,6 +1,8 @@
 import pygame
 from entities.game_sprite import GameSprite
 
+VIEW_3_BG_COLOUR = (84, 183, 166)
+
 
 class DisplayManager:
     def __init__(self, window, image_loader):
@@ -29,10 +31,11 @@ class DisplayManager:
         pygame.display.flip()
 
     def update_view_3(self, username_box, password_box, login_button):
-        self.window.fill((0, 0, 0))
+        self.window.fill(VIEW_3_BG_COLOUR)
         username_box.draw(self.window)
         password_box.draw(self.window)
-        self.window.blit(login_button.get_surface(), (0, 0))
+        login_button.draw(self.window)
+        self.display_logo()
         pygame.display.flip()
 
     def update_view_2_with_gacha(self, user, item):
@@ -114,3 +117,7 @@ class DisplayManager:
     def set_background(self):
         image = self.image_loader.load_background()
         self.window.blit(image, (0, 0))
+
+    def display_logo(self):
+        logo = self.image_loader.load_logo()
+        self.window.blit(logo, (25, 50))

@@ -6,6 +6,7 @@ class Button:
         text_surface = pygame.font.Font(None, 32).render(text, True, text_colour)
         height = text_surface.get_height()
         width = text_surface.get_width()
+        self.position = (pos_x, pos_y)
         self.surface = pygame.Surface((width, height))
         self.surface.fill(bg_colour)
         self.surface.blit(text_surface, (0, 0))
@@ -21,3 +22,6 @@ class Button:
         if event.type == pygame.MOUSEBUTTONDOWN:
             if self.rect.collidepoint(event.pos):
                 pass
+
+    def draw(self, window):
+        window.blit(self.surface, self.position)

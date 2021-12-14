@@ -20,7 +20,7 @@ class App:
         resolution = (450, 840)
         self.username_input_box = InputBox(130, 200, 200, 40)
         self.password_input_box = InputBox(130, 300, 200, 40)
-        self.login_button = Button("Login", 0, 0, BLACK, WHITE)
+        self.login_button = Button("Login", 200, 400, BLACK, WHITE)
         self.display_manager = DisplayManager(
             pygame.display.set_mode(resolution), ImageLoader()
         )

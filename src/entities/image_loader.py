@@ -27,3 +27,6 @@ class ImageLoader:
 
     def load_background(self):
         return pygame.image.load("src/media/garden.png")
+
+    def load_logo(self):
+        return pygame.image.load("src/media/logo.png")
