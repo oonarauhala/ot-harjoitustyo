@@ -7,9 +7,9 @@ class TestImageLoader(unittest.TestCase):
     def setUp(self):
         self.image_loader = ImageLoader()
 
-    def test_view_1_image_load_returns_4_images(self):
+    def test_view_1_image_load_returns_5_images(self):
         image_list = self.image_loader.load_view_images(1)
-        self.assertEqual(len(image_list), 4)
+        self.assertEqual(len(image_list), 5)
 
     def test_view_2_image_load_returns_4_images(self):
         image_list = self.image_loader.load_view_images(2)
