@@ -7,7 +7,24 @@ BLACK = (0, 0, 0)
 
 
 class DisplayManager:
+    """A class that handles everything that is displayed.
+
+    Attributes:
+            window: The main window surface of the app.
+            width: Main window width.
+            height: Main window height.
+            sprite_group: A pygame Group object containing current view sprites.
+            image_loader: A helper object that loads all images.
+            font: Main font of the app.
+    """
+
     def __init__(self, window, image_loader):
+        """A class constructor that creates a display manager.
+
+        Args:
+            window: The main window surface of the app.
+            image_loader: A pygame Group object containing current view sprites.
+        """
         self.window = window
         self.width = window.get_width()
         self.height = window.get_height()
@@ -17,6 +34,7 @@ class DisplayManager:
         pygame.display.set_caption("Gacha pet")
 
     def flip(self):
+        """A function that draws the window"""
         pygame.display.flip()
 
     def update_view_1(self, user, pet):
