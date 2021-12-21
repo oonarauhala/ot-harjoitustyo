@@ -2,20 +2,18 @@ from app import App
 from entities import validator
 from entities.user_repository import UserRepository
 from entities.validator import Validator
+from entities.user import User
 
 
 def main():
+    user = User()
     validator = Validator()
-    users = UserRepository(validator)
-    nimi = "Piko"
-    user = {
-        "password": "salasana",
-        "items": {"food": 5, "money": 5},
-    }
-    users.put(nimi, user)
-    print(users.get_user(nimi))
-    # app = App()
-    # app.run()
+    user_repository = UserRepository(validator, user)
+    # users.put(nimi, user)
+    # data = users.get_user(nimi)
+
+    app = App(user_repository)
+    app.run()
 
 
 if __name__ == "__main__":

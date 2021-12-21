@@ -15,7 +15,7 @@ BLACK = (0, 0, 0)
 
 
 class App:
-    def __init__(self):
+    def __init__(self, user_repository):
         pygame.init()
         pygame.key.set_repeat(200, 25)
         resolution = (450, 840)
@@ -30,7 +30,7 @@ class App:
         self.hunger_generator = HungerGenerator()
         self.sprites = []
         self.pet = Pet("Pottu", "dog")
-        self.user_repository = UserRepository(Validator())
+        self.user_repository = user_repository
         self.view = 0
         self.login_error = False
 
@@ -97,7 +97,7 @@ class App:
                 if self.login_button.get_rect().collidepoint(position):
                     username = self.username_input_box.get_text()
                     password = self.password_input_box.get_text()
-                    self.user_repository.user.name = username
+                    # self.user_repository.user.name = username
                     if self.user_repository.login(username, password):
                         self.change_view(1)
                     else:

@@ -1,9 +1,8 @@
 class User:
     def __init__(self):
         self.name = ""
-        self.password = ""
-        self.food = 5
-        self.money = 5
+        self.food = 0
+        self.money = 0
 
     def feed_pet(self, pet):
         self.food -= 1
@@ -22,8 +21,13 @@ class User:
             return True
         return False
 
-    def set_user_data(self, username, password, items):
+    def set_user_data(self, username, items):
         self.name = username
-        self.password = password
         self.food = items["food"]
         self.money = items["money"]
+
+    def reset(self):
+        self.name = ""
+        self.id = ""
+        self.food = 0
+        self.money = 0
