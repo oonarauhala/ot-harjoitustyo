@@ -1,7 +1,8 @@
 class User:
-    def __init__(self):
+    def __init__(self, pet):
         self.name = ""
         self.password = ""
+        self.pet = pet
         self.food = 0
         self.money = 0
 
@@ -35,7 +36,9 @@ class User:
         self.money = 0
 
     def export_data(self):
+        pet_data = self.pet.export_data()
         return {
             "password": self.password,
             "items": {"food": self.food, "money": self.money},
+            "pet": pet_data,
         }

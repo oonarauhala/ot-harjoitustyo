@@ -44,11 +44,24 @@ class UserRepository:
             password
         ):
             if not self._user_exists(username):
-                user_data = {"password": password, "items": {"food": 5, "money": 5}}
-                self._put(username, user_data)
-                self.user.set_user_data(username, password, user_data["items"])
+                items = {"food": 5, "money": 5}
+                # self._put(username, user_data)
+                self.user.set_user_data(username, password, items)
                 return True
         return False
+
+    def complete_registration(self, pet_name):
+        self.user.pet.set_data(pet_name, "dog", 3)
+        data = {
+            "password": self.user.password,
+            "items": {"food": self.user.food, "money": self.user.money},
+            "pet": {
+                "name": self.user.pet.name,
+                "animal_type": self.user.pet.animal_type,
+                "hunger": self.user.pet.hunger,
+            },
+        }
+        self._put(self.user.name, data)
 
     def logout(self):
         self._delete(self.user.name)

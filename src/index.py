@@ -3,10 +3,12 @@ from entities import validator
 from entities.user_repository import UserRepository
 from entities.validator import Validator
 from entities.user import User
+from entities.pet import Pet
 
 
 def main():
-    user = User()
+    pet = Pet()
+    user = User(pet)
     validator = Validator()
     user_repository = UserRepository(validator, user)
     app = App(user_repository)

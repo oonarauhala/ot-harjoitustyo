@@ -171,6 +171,22 @@ class DisplayManager:
         self._display_view_4_error()
         self.flip()
 
+    def _view_5(self, pet_name_box, continue_button):
+        self.window.fill(LOGIN_REGISTER_BG_COLOUR)
+        self._display_label("Pet name", 200, 180)
+        pet_name_box.draw(self.window)
+        continue_button.draw(self.window)
+        self.display_logo()
+
+    def update_view_5(self, pet_name_box, continue_button):
+        self._view_5(pet_name_box, continue_button)
+        self.flip()
+
+    def update_view_5_with_error(self, pet_name_box, continue_button):
+        self._view_5(pet_name_box, continue_button)
+        self._display_view_5_error()
+        self.flip()
+
     def create_view_1_sprites(self):
         """A function that creates main game view sprites and keeps a list of them.
 
@@ -303,3 +319,7 @@ class DisplayManager:
             "Error in registrarion. Check passwords or change username", True, BLACK
         )
         self.window.blit(text, (80, 480))
+
+    def _display_view_5_error(self):
+        text = self.font.render("Incorrect pet name", True, BLACK)
+        self.window.blit(text, (160, 250))
