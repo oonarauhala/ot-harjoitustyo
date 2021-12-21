@@ -7,9 +7,9 @@ Pelissä on käytössä virtuaalivaluutta.
 
 ### Suunnitellut toiminnallisuudet
 
-* Pelaaja voi rekisteröityä sovellukseen
+* Pelaaja voi rekisteröityä sovellukseen (tehty viikko 7)
 * Pelaaja voi kirjautua sisään ja ulos sovelluksesta (tehty, viikko 6)
-* Pelaaja voi luoda lemmikin tililleen
+* Pelaaja voi luoda lemmikin tililleen (tehty viikko 7)
 * Pelaaja voi hankkia lemmikille ruokaa ja tavaroita automaateista (tehty, viikko 4)
 * Pelaaja voi ruokkia lemmikkiä (tehty, viikko 4)
 * Lemmikin nälkäisyys lisääntyy tietyssä ajassa (tehty, viikko 5)
