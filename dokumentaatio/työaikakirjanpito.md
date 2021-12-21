@@ -12,4 +12,5 @@ Päivä   | Aika (h)| Tehty työ
 7.12 | 3.5 | Lisää testejä ja pieniä toiminnallikuuksia (esim. gacha maksaa)
 13.12 | 5 | Aloita firebase tietokantayhteys ja sisäänkirjautuminen
 14.12 | 5.5 | Implementoi sisäänkirjautuminen, kirjoita unit testejä ja kirjoita docstrings.
-TOTAL | 33 |
+15.12 | 6 | Toteuta rekisteröinti ja viimeistele koodia
+TOTAL | 39 |
