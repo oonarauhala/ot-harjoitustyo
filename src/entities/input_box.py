@@ -21,7 +21,6 @@ class InputBox:
     def handle_event(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN:
             if self.rect.collidepoint(event.pos):
-                # print(event.pos)
                 self.active = True
             else:
                 self.active = False

@@ -1,3 +1,4 @@
+from entities import user
 from firebase import firebase
 from entities.user import User
 
@@ -18,19 +19,24 @@ class UserRepository:
         self.db.delete("/users/", name)
 
     def _get_user(self, username):
-        users = self.db.get(f"/users/{username}", None)
-        return users
+        user = self.db.get(f"/users/{username}", None)
+        return user
+
+    def _user_exists(self, username):
+        result = self._get_user(username)
+        return True if result != None else False
 
     def login(self, username, password):
         if self.validator.validate_string(username) and self.validator.validate_string(
             password
         ):
-            user_data = self._get_user(username)
-            id = self._parse_id(user_data)
-            data = self._extract_by_id(user_data, id)
-            if self._check_password(data["password"], password):
-                self.user.set_user_data(username, data["password"], data["items"])
-                return True
+            if self._user_exists(username):
+                user_data = self._get_user(username)
+                id = self._parse_id(user_data)
+                data = self._extract_by_id(user_data, id)
+                if self._check_password(data["password"], password):
+                    self.user.set_user_data(username, data["password"], data["items"])
+                    return True
         return False
 
     def logout(self):

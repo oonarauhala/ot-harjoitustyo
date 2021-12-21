@@ -76,7 +76,8 @@ class App:
             elif self.view == 4:
                 for event in pygame.event.get():
                     self.register_username_input_box.handle_event(event)
-
+                    self.register_password_input_box.handle_event(event)
+                    self.register_password_again_input_box.handle_event(event)
                     if event.type == pygame.QUIT:
                         sys.exit()
                     if event.type == pygame.MOUSEBUTTONDOWN:
