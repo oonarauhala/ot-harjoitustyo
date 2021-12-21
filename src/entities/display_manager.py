@@ -33,8 +33,7 @@ class DisplayManager:
         self.font = pygame.font.SysFont("Arial", 20)
         pygame.display.set_caption("Gacha pet")
 
-    def flip(self):
-        """A function that draws the window"""
+    def _flip(self):
         pygame.display.flip()
 
     def update_view_1(self, user, pet):
@@ -44,19 +43,20 @@ class DisplayManager:
             user: Contains all user data.
             pet: Contains all user pet data.
         """
-        self.set_background()
+        self._set_background()
         self.sprite_group.draw(self.window)
-        self.display_money(user)
-        self.display_hunger(pet)
-        self.display_food(user)
-        self.display_username(user.name)
+        self._display_money(user)
+        self._display_hunger(pet)
+        self._display_food(user)
+        self._display_username(user.name)
+        self._display_pet_name(pet.name)
         pygame.display.flip()
 
     def _view_2(self, user):
         self.window.fill((0, 0, 0))
         self.sprite_group.draw(self.window)
-        self.display_money(user)
-        self.display_food(user)
+        self._display_money(user)
+        self._display_food(user)
 
     def update_view_2(self, user):
         """A function that updates gacha view using only basic elements.
@@ -65,7 +65,7 @@ class DisplayManager:
             user: Contains all user data.
         """
         self._view_2(user)
-        self.flip()
+        self._flip()
 
     def update_view_2_with_gacha(self, user, item):
         """A function that updates gacha view with gacha text.
@@ -75,8 +75,8 @@ class DisplayManager:
             item: Name of the item got from gacha.
         """
         self._view_2(user)
-        self.display_gacha(item)
-        self.flip()
+        self._display_gacha(item)
+        self._flip()
 
     def update_view_2_with_gacha_unsuccessful(self, user):
         """A function that updates gacha view when gacha game unsuccessful (no money).
@@ -85,8 +85,8 @@ class DisplayManager:
             user: Contains all user data.
         """
         self._view_2(user)
-        self.display_no_money_message()
-        self.flip()
+        self._display_no_money_message()
+        self._flip()
 
     def _view_3(self, username_box, password_box, login_button, to_register_button):
         self.window.fill(LOGIN_REGISTER_BG_COLOUR)
@@ -96,7 +96,7 @@ class DisplayManager:
         password_box.draw(self.window)
         login_button.draw(self.window)
         to_register_button.draw(self.window)
-        self.display_logo()
+        self._display_logo()
 
     def update_view_3(
         self, username_box, password_box, login_button, to_register_button
@@ -109,7 +109,7 @@ class DisplayManager:
             login_button: A button that is used to log in.
         """
         self._view_3(username_box, password_box, login_button, to_register_button)
-        self.flip()
+        self._flip()
 
     def update_view_3_with_error(
         self, username_box, password_box, login_button, to_register_button
@@ -122,8 +122,8 @@ class DisplayManager:
             login_button: A button that is used to log in.
         """
         self._view_3(username_box, password_box, login_button, to_register_button)
-        self.display_login_error()
-        self.flip()
+        self._display_login_error()
+        self._flip()
 
     def _view_4(
         self,
@@ -142,7 +142,7 @@ class DisplayManager:
         password_again_box.draw(self.window)
         register_button.draw(self.window)
         to_login_button.draw(self.window)
-        self.display_logo()
+        self._display_logo()
 
     def update_view_4(
         self,
@@ -155,7 +155,7 @@ class DisplayManager:
         self._view_4(
             username_box, password_box, password_again_box, register_button, back_button
         )
-        self.flip()
+        self._flip()
 
     def update_view_4_with_error(
         self,
@@ -169,23 +169,23 @@ class DisplayManager:
             username_box, password_box, password_again_box, register_button, back_button
         )
         self._display_view_4_error()
-        self.flip()
+        self._flip()
 
     def _view_5(self, pet_name_box, continue_button):
         self.window.fill(LOGIN_REGISTER_BG_COLOUR)
         self._display_label("Pet name", 200, 180)
         pet_name_box.draw(self.window)
         continue_button.draw(self.window)
-        self.display_logo()
+        self._display_logo()
 
     def update_view_5(self, pet_name_box, continue_button):
         self._view_5(pet_name_box, continue_button)
-        self.flip()
+        self._flip()
 
     def update_view_5_with_error(self, pet_name_box, continue_button):
         self._view_5(pet_name_box, continue_button)
         self._display_view_5_error()
-        self.flip()
+        self._flip()
 
     def create_view_1_sprites(self):
         """A function that creates main game view sprites and keeps a list of them.
@@ -236,75 +236,39 @@ class DisplayManager:
         sprite_list.append(food_sprite)
         return sprite_list
 
-    def display_money(self, user):
-        """A function that creates text of user's money and displays it on main game window.
-
-        Args:
-            user: Contains all user data.
-        """
+    def _display_money(self, user):
         text = self.font.render(str(user.money), True, (255, 255, 255))
         self.window.blit(text, (65, 795))
 
-    def display_hunger(self, pet):
-        """A function that creates text of pet's hunger and displays it on main game window.
-
-        Args:
-            pet: Contains all pet data.
-        """
+    def _display_hunger(self, pet):
         text = self.font.render(f"Hunger: {pet.hunger}", True, (255, 255, 255))
         self.window.blit(text, (250, 795))
 
-    def display_gacha(self, item):
-        """A function that creates text of the name of obtained item and displays it on
-        main game window.
-
-        Args:
-            item: The name of obtained item.
-        """
+    def _display_gacha(self, item):
         text = self.font.render(f"You got {item}!", True, (255, 255, 255))
         self.window.blit(text, (150, 100))
 
-    def display_food(self, user):
-        """A function that creates text of number of food in user's posession and displays
-        it on main game window.
-
-        Args:
-            user: Contains all user data.
-        """
+    def _display_food(self, user):
         text = self.font.render(str(user.food), True, (255, 255, 255))
         self.window.blit(text, (195, 795))
 
-    def display_no_money_message(self):
-        """A function that creates text that informs user that they do not have enough money
-        to play gacha and displays it on main game window.
-
-        Args:
-            user: Contains all user data.
-        """
+    def _display_no_money_message(self):
         text = self.font.render("Not enough money", True, (255, 255, 255))
         self.window.blit(text, (150, 100))
 
-    def display_username(self, username):
-        """A function that creates text of the username and displays it on main game window.
-
-        Args:
-            username: The name of the user.
-        """
+    def _display_username(self, username):
         text = self.font.render(username, True, (0, 0, 0))
         self.window.blit(text, (20, 20))
 
-    def set_background(self):
-        """A function that loads and sets the background to the main screen."""
+    def _set_background(self):
         image = self.image_loader.load_background()
         self.window.blit(image, (0, 0))
 
-    def display_logo(self):
-        """A function that loads and displays game logo in login screen."""
+    def _display_logo(self):
         logo = self.image_loader.load_logo()
         self.window.blit(logo, (25, 50))
 
-    def display_login_error(self):
-        """A function that creates and displays login error text."""
+    def _display_login_error(self):
         text = self.font.render("Incorrect username or password", True, BLACK)
         self.window.blit(text, (100, 360))
 
@@ -323,3 +287,8 @@ class DisplayManager:
     def _display_view_5_error(self):
         text = self.font.render("Incorrect pet name", True, BLACK)
         self.window.blit(text, (160, 250))
+
+    def _display_pet_name(self, name):
+        font = pygame.font.SysFont("Edwardian Script", 15)
+        text = font.render(name, True, BLACK)
+        self.window.blit(text, (200, 700))
