@@ -74,6 +74,13 @@ class App:
             elif self.view == 3:
                 self.handle_view_3()
             elif self.view == 4:
+                self.display_manager.update_view_4(
+                    self.register_username_input_box,
+                    self.register_password_input_box,
+                    self.register_password_again_input_box,
+                    self.register_button,
+                    self.to_login_button,
+                )
                 for event in pygame.event.get():
                     self.register_username_input_box.handle_event(event)
                     self.register_password_input_box.handle_event(event)
@@ -150,11 +157,11 @@ class App:
 
     def logout(self):
         self.user_repository.logout()
-        self._reset_login()
+        self._reset_input_boxes()
         self.change_view(3)
 
     def change_view(self, view):
-        self._reset_login()
+        self._reset_input_boxes()
         self._kill_all_sprites()
         if view == 1:
             self.sprites = self.display_manager.create_view_1_sprites()
@@ -185,7 +192,10 @@ class App:
     def _kill_all_sprites(self):
         self.sprites = []
 
-    def _reset_login(self):
+    def _reset_input_boxes(self):
         self.login_username_input_box.reset()
         self.login_password_input_box.reset()
+        self.register_password_again_input_box.reset()
+        self.register_password_input_box.reset()
+        self.register_username_input_box.reset()
         self.login_error = False

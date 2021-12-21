@@ -53,11 +53,6 @@ class DisplayManager:
         pygame.display.flip()
 
     def _view_2(self, user):
-        """A function that creates a basic gacha view.
-
-        Args:
-            user: Contains all user data.
-        """
         self.window.fill((0, 0, 0))
         self.sprite_group.draw(self.window)
         self.display_money(user)
@@ -94,15 +89,10 @@ class DisplayManager:
         self.flip()
 
     def _view_3(self, username_box, password_box, login_button, to_register_button):
-        """A function that creates a basic login view.
-
-        Args:
-            username_box: Username input box.
-            password_box: Password input box.
-            login_button: A button that is used to log in.
-        """
         self.window.fill(LOGIN_REGISTER_BG_COLOUR)
+        self._display_label("Username", 200, 180)
         username_box.draw(self.window)
+        self._display_label("Password", 200, 280)
         password_box.draw(self.window)
         login_button.draw(self.window)
         to_register_button.draw(self.window)
@@ -144,8 +134,11 @@ class DisplayManager:
         to_login_button,
     ):
         self.window.fill(LOGIN_REGISTER_BG_COLOUR)
+        self._display_label("Username", 200, 180)
         username_box.draw(self.window)
+        self._display_label("Password", 200, 280)
         password_box.draw(self.window)
+        self._display_label("Password again", 190, 380)
         password_again_box.draw(self.window)
         register_button.draw(self.window)
         to_login_button.draw(self.window)
@@ -284,3 +277,8 @@ class DisplayManager:
         """A function that creates and displays login error text."""
         text = self.font.render("Incorrect username or password", True, BLACK)
         self.window.blit(text, (100, 360))
+
+    def _display_label(self, text, pos_x, pos_y):
+        font = pygame.font.SysFont("Arial", 12)
+        text_surface = font.render(text, True, BLACK)
+        self.window.blit(text_surface, (pos_x, pos_y))
