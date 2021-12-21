@@ -10,17 +10,13 @@ class UserRepository:
         )
         self.user = User()
         self.validator = validator
-        # result = self.db.get("/", None)
-        # print(result)
 
-    def put(self, user):
-        result = self.db.post("/users", user)
-        # print(result)
+    def put(self, name, user):
+        self.db.post(f"/users/{name}", user)
 
     def get_user(self, username):
-        users = self.db.get("/users/", None)
+        users = self.db.get(f"/users/{username}", None)
         return users
-        # print(users)
 
     def login(self, username, password):
         if self.validator.validate_string(username) and self.validator.validate_string(
