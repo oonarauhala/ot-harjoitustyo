@@ -45,116 +45,15 @@ class App:
         self.change_view(3)
         while True:
             if self.view == 1:
-                for event in pygame.event.get():
-                    if event.type == pygame.QUIT:
-                        sys.exit()
-                    if event.type == pygame.MOUSEBUTTONDOWN:
-                        position = event.pos
-                        # Click pet sprite
-                        if self.sprites[0].rect.collidepoint(position):
-                            if self.user_repository.user.pet.is_hungry():
-                                self.feed_pet()
-                        # Click gacha button
-                        if self.sprites[1].rect.collidepoint(position):
-                            self.change_view(2)
-                        try:
-                            if self.sprites[4].rect.collidepoint(position):
-                                self.logout()
-                        except:
-                            pass
+                self._handle_view_1()
             elif self.view == 2:
-                for event in pygame.event.get():
-                    if event.type == pygame.QUIT:
-                        sys.exit()
-                    if event.type == pygame.MOUSEBUTTONDOWN:
-                        position = event.pos
-                        # Click gacha
-                        if self.sprites[0].rect.collidepoint(position):
-                            self.play_gacha()
-                        # Click arrow
-                        if self.sprites[1].rect.collidepoint(position):
-                            self.change_view(1)
+                self._handle_view_2()
             elif self.view == 3:
-                self.handle_view_3()
+                self._handle_view_3()
             elif self.view == 4:
-                if not self.register_error:
-                    self.display_manager.update_view_4(
-                        self.register_username_input_box,
-                        self.register_password_input_box,
-                        self.register_password_again_input_box,
-                        self.register_button,
-                        self.to_login_button,
-                    )
-                else:
-                    self.display_manager.update_view_4_with_error(
-                        self.register_username_input_box,
-                        self.register_password_input_box,
-                        self.register_password_again_input_box,
-                        self.register_button,
-                        self.to_login_button,
-                    )
-                for event in pygame.event.get():
-                    self.register_username_input_box.handle_event(event)
-                    self.register_password_input_box.handle_event(event)
-                    self.register_password_again_input_box.handle_event(event)
-                    if event.type == pygame.QUIT:
-                        sys.exit()
-                    if event.type == pygame.MOUSEBUTTONDOWN:
-                        position = event.pos
-                        if self.register_button.get_rect().collidepoint(position):
-                            username = self.register_username_input_box.get_text()
-                            password = self.register_password_input_box.get_text()
-                            password_again = (
-                                self.register_password_again_input_box.get_text()
-                            )
-                            if password == password_again:
-                                if self.user_repository.register(username, password):
-                                    self.change_view(5)
-                                else:
-                                    self.register_error = True
-                                    self.display_manager.update_view_4_with_error(
-                                        self.register_username_input_box,
-                                        self.register_password_input_box,
-                                        self.register_password_again_input_box,
-                                        self.register_button,
-                                        self.to_login_button,
-                                    )
-                            else:
-                                self.register_error = True
-                                self.display_manager.update_view_4_with_error(
-                                    self.register_username_input_box,
-                                    self.register_password_input_box,
-                                    self.register_password_again_input_box,
-                                    self.register_button,
-                                    self.to_login_button,
-                                )
-                        if self.to_login_button.get_rect().collidepoint(position):
-                            self.change_view(3)
+                self._handle_view_4()
             elif self.view == 5:
-                if not self.pet_name_error:
-                    self.display_manager.update_view_5(
-                        self.pet_name_box, self.continue_button
-                    )
-                else:
-                    self.display_manager.update_view_5_with_error(
-                        self.pet_name_box, self.continue_button
-                    )
-                for event in pygame.event.get():
-                    self.pet_name_box.handle_event(event)
-                    if event.type == pygame.QUIT:
-                        sys.exit()
-                    if event.type == pygame.MOUSEBUTTONDOWN:
-                        position = event.pos
-                        if self.continue_button.get_rect().collidepoint(position):
-                            pet_name = self.pet_name_box.get_text()
-                            if len(pet_name) > 1:
-                                self.user_repository.complete_registration(pet_name)
-                                self.change_view(1)
-                            else:
-                                self.pet_name_error = True
-                                self.display_manager.update_view_5_with_error(
-                                    self.pet_name_box, self.continue_button
-                                )
+                self._handle_view_5()
 
             if self.hunger_generator.generate_hunger() and self.view == 1:
                 self.user_repository.user.pet.get_hungrier()
@@ -163,7 +62,39 @@ class App:
                 )
             self.clock.tick(30)
 
-    def handle_view_3(self):
+    def _handle_view_1(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                position = event.pos
+                # Click pet sprite
+                if self.sprites[0].rect.collidepoint(position):
+                    if self.user_repository.user.pet.is_hungry():
+                        self.feed_pet()
+                # Click gacha button
+                if self.sprites[1].rect.collidepoint(position):
+                    self.change_view(2)
+                try:
+                    if self.sprites[4].rect.collidepoint(position):
+                        self.logout()
+                except:
+                    pass
+
+    def _handle_view_2(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                position = event.pos
+                # Click gacha
+                if self.sprites[0].rect.collidepoint(position):
+                    self.play_gacha()
+                # Click arrow
+                if self.sprites[1].rect.collidepoint(position):
+                    self.change_view(1)
+
+    def _handle_view_3(self):
         if not self.login_error:
             self.display_manager.update_view_3(
                 self.login_username_input_box,
@@ -186,6 +117,7 @@ class App:
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 position = event.pos
+                # Click login button
                 if self.login_button.get_rect().collidepoint(position):
                     username = self.login_username_input_box.get_text()
                     password = self.login_password_input_box.get_text()
@@ -199,8 +131,86 @@ class App:
                             self.login_button,
                             self.to_register_button,
                         )
+                # Click register button
                 elif self.to_register_button.get_rect().collidepoint(position):
                     self.change_view(4)
+
+    def _handle_view_4(self):
+        if not self.register_error:
+            self.display_manager.update_view_4(
+                self.register_username_input_box,
+                self.register_password_input_box,
+                self.register_password_again_input_box,
+                self.register_button,
+                self.to_login_button,
+            )
+        else:
+            self.display_manager.update_view_4_with_error(
+                self.register_username_input_box,
+                self.register_password_input_box,
+                self.register_password_again_input_box,
+                self.register_button,
+                self.to_login_button,
+            )
+        for event in pygame.event.get():
+            self.register_username_input_box.handle_event(event)
+            self.register_password_input_box.handle_event(event)
+            self.register_password_again_input_box.handle_event(event)
+            if event.type == pygame.QUIT:
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                position = event.pos
+                if self.register_button.get_rect().collidepoint(position):
+                    username = self.register_username_input_box.get_text()
+                    password = self.register_password_input_box.get_text()
+                    password_again = self.register_password_again_input_box.get_text()
+                    if password == password_again:
+                        if self.user_repository.register(username, password):
+                            self.change_view(5)
+                        else:
+                            self.register_error = True
+                            self.display_manager.update_view_4_with_error(
+                                self.register_username_input_box,
+                                self.register_password_input_box,
+                                self.register_password_again_input_box,
+                                self.register_button,
+                                self.to_login_button,
+                            )
+                    else:
+                        self.register_error = True
+                        self.display_manager.update_view_4_with_error(
+                            self.register_username_input_box,
+                            self.register_password_input_box,
+                            self.register_password_again_input_box,
+                            self.register_button,
+                            self.to_login_button,
+                        )
+                if self.to_login_button.get_rect().collidepoint(position):
+                    self.change_view(3)
+
+    def _handle_view_5(self):
+        if not self.pet_name_error:
+            self.display_manager.update_view_5(self.pet_name_box, self.continue_button)
+        else:
+            self.display_manager.update_view_5_with_error(
+                self.pet_name_box, self.continue_button
+            )
+        for event in pygame.event.get():
+            self.pet_name_box.handle_event(event)
+            if event.type == pygame.QUIT:
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                position = event.pos
+                if self.continue_button.get_rect().collidepoint(position):
+                    pet_name = self.pet_name_box.get_text()
+                    if len(pet_name) > 1:
+                        self.user_repository.complete_registration(pet_name)
+                        self.change_view(1)
+                    else:
+                        self.pet_name_error = True
+                        self.display_manager.update_view_5_with_error(
+                            self.pet_name_box, self.continue_button
+                        )
 
     def feed_pet(self):
         self.user_repository.user.feed_pet(self.user_repository.user.pet)
