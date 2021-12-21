@@ -125,7 +125,7 @@ class DisplayManager:
         self.display_login_error()
         self.flip()
 
-    def _view4(
+    def _view_4(
         self,
         username_box,
         password_box,
@@ -152,9 +152,23 @@ class DisplayManager:
         register_button,
         back_button,
     ):
-        self._view4(
+        self._view_4(
             username_box, password_box, password_again_box, register_button, back_button
         )
+        self.flip()
+
+    def update_view_4_with_error(
+        self,
+        username_box,
+        password_box,
+        password_again_box,
+        register_button,
+        back_button,
+    ):
+        self._view_4(
+            username_box, password_box, password_again_box, register_button, back_button
+        )
+        self._display_view_4_error()
         self.flip()
 
     def create_view_1_sprites(self):
@@ -282,3 +296,10 @@ class DisplayManager:
         font = pygame.font.SysFont("Arial", 12)
         text_surface = font.render(text, True, BLACK)
         self.window.blit(text_surface, (pos_x, pos_y))
+
+    def _display_view_4_error(self):
+        font = pygame.font.SysFont("Arial", 12)
+        text = font.render(
+            "Error in registrarion. Check passwords or change username", True, BLACK
+        )
+        self.window.blit(text, (80, 480))

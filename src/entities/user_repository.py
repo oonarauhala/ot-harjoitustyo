@@ -39,6 +39,17 @@ class UserRepository:
                     return True
         return False
 
+    def register(self, username, password):
+        if self.validator.validate_string(username) and self.validator.validate_string(
+            password
+        ):
+            if not self._user_exists(username):
+                user_data = {"password": password, "items": {"food": 5, "money": 5}}
+                self._put(username, user_data)
+                self.user.set_user_data(username, password, user_data["items"])
+                return True
+        return False
+
     def logout(self):
         self._delete(self.user.name)
         self._put(self.user.name, self.user.export_data())

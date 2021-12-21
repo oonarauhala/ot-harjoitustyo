@@ -37,6 +37,7 @@ class App:
         self.user_repository = user_repository
         self.view = 0
         self.login_error = False
+        self.register_error = False
 
     def run(self):
         self.change_view(3)
@@ -74,13 +75,22 @@ class App:
             elif self.view == 3:
                 self.handle_view_3()
             elif self.view == 4:
-                self.display_manager.update_view_4(
-                    self.register_username_input_box,
-                    self.register_password_input_box,
-                    self.register_password_again_input_box,
-                    self.register_button,
-                    self.to_login_button,
-                )
+                if not self.register_error:
+                    self.display_manager.update_view_4(
+                        self.register_username_input_box,
+                        self.register_password_input_box,
+                        self.register_password_again_input_box,
+                        self.register_button,
+                        self.to_login_button,
+                    )
+                else:
+                    self.display_manager.update_view_4_with_error(
+                        self.register_username_input_box,
+                        self.register_password_input_box,
+                        self.register_password_again_input_box,
+                        self.register_button,
+                        self.to_login_button,
+                    )
                 for event in pygame.event.get():
                     self.register_username_input_box.handle_event(event)
                     self.register_password_input_box.handle_event(event)
@@ -90,8 +100,32 @@ class App:
                     if event.type == pygame.MOUSEBUTTONDOWN:
                         position = event.pos
                         if self.register_button.get_rect().collidepoint(position):
-                            # TODO register
-                            print("REGISTER")
+                            username = self.register_username_input_box.get_text()
+                            password = self.register_password_input_box.get_text()
+                            password_again = (
+                                self.register_password_again_input_box.get_text()
+                            )
+                            if password == password_again:
+                                if self.user_repository.register(username, password):
+                                    self.change_view(1)
+                                else:
+                                    self.register_error = True
+                                    self.display_manager.update_view_4_with_error(
+                                        self.register_username_input_box,
+                                        self.register_password_input_box,
+                                        self.register_password_again_input_box,
+                                        self.register_button,
+                                        self.to_login_button,
+                                    )
+                            else:
+                                self.register_error = True
+                                self.display_manager.update_view_4_with_error(
+                                    self.register_username_input_box,
+                                    self.register_password_input_box,
+                                    self.register_password_again_input_box,
+                                    self.register_button,
+                                    self.to_login_button,
+                                )
                         if self.to_login_button.get_rect().collidepoint(position):
                             self.change_view(3)
 
@@ -126,6 +160,7 @@ class App:
                 if self.login_button.get_rect().collidepoint(position):
                     username = self.login_username_input_box.get_text()
                     password = self.login_password_input_box.get_text()
+                    self.display_manager.dim()
                     if self.user_repository.login(username, password):
                         self.change_view(1)
                     else:
@@ -199,3 +234,4 @@ class App:
         self.register_password_input_box.reset()
         self.register_username_input_box.reset()
         self.login_error = False
+        self.register_error = False
