@@ -14,6 +14,9 @@ class UserRepository:
     def _put(self, name, user):
         self.db.post(f"/users/{name}", user)
 
+    def _delete(self, name):
+        self.db.delete("/users/", name)
+
     def _get_user(self, username):
         users = self.db.get(f"/users/{username}", None)
         return users
@@ -26,11 +29,13 @@ class UserRepository:
             id = self._parse_id(user_data)
             data = self._extract_by_id(user_data, id)
             if self._check_password(data["password"], password):
-                self.user.set_user_data(username, data["items"])
+                self.user.set_user_data(username, data["password"], data["items"])
                 return True
         return False
 
     def logout(self):
+        self._delete(self.user.name)
+        self._put(self.user.name, self.user.export_data())
         self.user.reset()
 
     def _parse_id(self, data):
