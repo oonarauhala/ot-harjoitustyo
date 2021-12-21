@@ -7,8 +7,6 @@ from entities.image_loader import ImageLoader
 from entities.hunger_generator import HungerGenerator
 from entities.input_box import InputBox
 from entities.button import Button
-from entities.user_repository import UserRepository
-from entities.validator import Validator
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -19,9 +17,15 @@ class App:
         pygame.init()
         pygame.key.set_repeat(200, 25)
         resolution = (450, 840)
-        self.username_input_box = InputBox(130, 200, 200, 40)
-        self.password_input_box = InputBox(130, 300, 200, 40)
+        self.login_username_input_box = InputBox(130, 200, 200, 40)
+        self.login_password_input_box = InputBox(130, 300, 200, 40)
+        self.register_username_input_box = InputBox(130, 200, 200, 40)
+        self.register_password_input_box = InputBox(130, 300, 200, 40)
+        self.register_password_again_input_box = InputBox(130, 400, 200, 40)
         self.login_button = Button("Login", 200, 400, BLACK, WHITE)
+        self.register_button = Button("Register", 200, 500, BLACK, WHITE)
+        self.to_login_button = Button("Login", 200, 600, BLACK, WHITE)
+        self.to_register_button = Button("Register", 200, 500, BLACK, WHITE)
         self.display_manager = DisplayManager(
             pygame.display.set_mode(resolution), ImageLoader()
         )
@@ -38,7 +42,6 @@ class App:
         self.change_view(3)
         while True:
             if self.view == 1:
-
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         sys.exit()
@@ -70,6 +73,19 @@ class App:
                             self.change_view(1)
             elif self.view == 3:
                 self.handle_view_3()
+            elif self.view == 4:
+                for event in pygame.event.get():
+                    self.register_username_input_box.handle_event(event)
+
+                    if event.type == pygame.QUIT:
+                        sys.exit()
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                        position = event.pos
+                        if self.register_button.get_rect().collidepoint(position):
+                            # TODO register
+                            print("REGISTER")
+                        if self.to_login_button.get_rect().collidepoint(position):
+                            self.change_view(3)
 
             if self.hunger_generator.generate_hunger() and self.view == 1:
                 self.pet.get_hungrier()
@@ -79,34 +95,41 @@ class App:
     def handle_view_3(self):
         if not self.login_error:
             self.display_manager.update_view_3(
-                self.username_input_box, self.password_input_box, self.login_button
+                self.login_username_input_box,
+                self.login_password_input_box,
+                self.login_button,
+                self.to_register_button,
             )
         else:
             self.display_manager.update_view_3_with_error(
-                self.username_input_box, self.password_input_box, self.login_button
+                self.login_username_input_box,
+                self.login_password_input_box,
+                self.login_button,
+                self.to_register_button,
             )
 
         for event in pygame.event.get():
-            self.username_input_box.handle_event(event)
-            self.password_input_box.handle_event(event)
-            # self.login_button.click(event)
+            self.login_username_input_box.handle_event(event)
+            self.login_password_input_box.handle_event(event)
             if event.type == pygame.QUIT:
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 position = event.pos
                 if self.login_button.get_rect().collidepoint(position):
-                    username = self.username_input_box.get_text()
-                    password = self.password_input_box.get_text()
-                    # self.user_repository.user.name = username
+                    username = self.login_username_input_box.get_text()
+                    password = self.login_password_input_box.get_text()
                     if self.user_repository.login(username, password):
                         self.change_view(1)
                     else:
                         self.login_error = True
                         self.display_manager.update_view_3_with_error(
-                            self.username_input_box,
-                            self.password_input_box,
+                            self.login_username_input_box,
+                            self.login_password_input_box,
                             self.login_button,
+                            self.to_register_button,
                         )
+                elif self.to_register_button.get_rect().collidepoint(position):
+                    self.change_view(4)
 
     def feed_pet(self):
         self.user_repository.user.feed_pet(self.pet)
@@ -126,13 +149,12 @@ class App:
 
     def logout(self):
         self.user_repository.logout()
-        self.username_input_box.reset()
-        self.password_input_box.reset()
-        self.login_error = False
+        self._reset_login()
         self.change_view(3)
 
     def change_view(self, view):
-        self.kill_all_sprites()
+        self._reset_login()
+        self._kill_all_sprites()
         if view == 1:
             self.sprites = self.display_manager.create_view_1_sprites()
             self.display_manager.update_view_1(self.user_repository.user, self.pet)
@@ -143,9 +165,26 @@ class App:
             self.view = 2
         if view == 3:
             self.display_manager.update_view_3(
-                self.username_input_box, self.password_input_box, self.login_button
+                self.login_username_input_box,
+                self.login_password_input_box,
+                self.login_button,
+                self.to_register_button,
             )
             self.view = 3
+        if view == 4:
+            self.display_manager.update_view_4(
+                self.register_username_input_box,
+                self.register_password_input_box,
+                self.register_password_again_input_box,
+                self.register_button,
+                self.to_login_button,
+            )
+            self.view = 4
 
-    def kill_all_sprites(self):
+    def _kill_all_sprites(self):
         self.sprites = []
+
+    def _reset_login(self):
+        self.login_username_input_box.reset()
+        self.login_password_input_box.reset()
+        self.login_error = False

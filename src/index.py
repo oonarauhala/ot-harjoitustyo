@@ -9,9 +9,6 @@ def main():
     user = User()
     validator = Validator()
     user_repository = UserRepository(validator, user)
-    # users.put(nimi, user)
-    # data = users.get_user(nimi)
-
     app = App(user_repository)
     app.run()
 

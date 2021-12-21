@@ -1,7 +1,7 @@
 import pygame
 from entities.game_sprite import GameSprite
 
-VIEW_3_BG_COLOUR = (84, 183, 166)
+LOGIN_REGISTER_BG_COLOUR = (84, 183, 166)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 
@@ -93,7 +93,7 @@ class DisplayManager:
         self.display_no_money_message()
         self.flip()
 
-    def _view_3(self, username_box, password_box, login_button):
+    def _view_3(self, username_box, password_box, login_button, to_register_button):
         """A function that creates a basic login view.
 
         Args:
@@ -101,13 +101,16 @@ class DisplayManager:
             password_box: Password input box.
             login_button: A button that is used to log in.
         """
-        self.window.fill(VIEW_3_BG_COLOUR)
+        self.window.fill(LOGIN_REGISTER_BG_COLOUR)
         username_box.draw(self.window)
         password_box.draw(self.window)
         login_button.draw(self.window)
+        to_register_button.draw(self.window)
         self.display_logo()
 
-    def update_view_3(self, username_box, password_box, login_button):
+    def update_view_3(
+        self, username_box, password_box, login_button, to_register_button
+    ):
         """A function that updates login view using basic elements.
 
         Args:
@@ -115,10 +118,12 @@ class DisplayManager:
             password_box: Password input box.
             login_button: A button that is used to log in.
         """
-        self._view_3(username_box, password_box, login_button)
+        self._view_3(username_box, password_box, login_button, to_register_button)
         self.flip()
 
-    def update_view_3_with_error(self, username_box, password_box, login_button):
+    def update_view_3_with_error(
+        self, username_box, password_box, login_button, to_register_button
+    ):
         """A function that updates login view when a login error has occurred.
 
         Args:
@@ -126,8 +131,37 @@ class DisplayManager:
             password_box: Password input box.
             login_button: A button that is used to log in.
         """
-        self._view_3(username_box, password_box, login_button)
+        self._view_3(username_box, password_box, login_button, to_register_button)
         self.display_login_error()
+        self.flip()
+
+    def _view4(
+        self,
+        username_box,
+        password_box,
+        password_again_box,
+        register_button,
+        to_login_button,
+    ):
+        self.window.fill(LOGIN_REGISTER_BG_COLOUR)
+        username_box.draw(self.window)
+        password_box.draw(self.window)
+        password_again_box.draw(self.window)
+        register_button.draw(self.window)
+        to_login_button.draw(self.window)
+        self.display_logo()
+
+    def update_view_4(
+        self,
+        username_box,
+        password_box,
+        password_again_box,
+        register_button,
+        back_button,
+    ):
+        self._view4(
+            username_box, password_box, password_again_box, register_button, back_button
+        )
         self.flip()
 
     def create_view_1_sprites(self):
