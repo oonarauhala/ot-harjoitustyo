@@ -13,4 +13,5 @@ Päivä   | Aika (h)| Tehty työ
 13.12 | 5 | Aloita firebase tietokantayhteys ja sisäänkirjautuminen
 14.12 | 5.5 | Implementoi sisäänkirjautuminen, kirjoita unit testejä ja kirjoita docstrings.
 21.12 | 6 | Toteuta rekisteröinti ja viimeistele koodia
+23.12 | 2.5 | Refaktoroi koodia ja päivitä testejä
 TOTAL | 39 |
