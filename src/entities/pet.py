@@ -8,7 +8,7 @@ class Pet:
         return self.animal_type
 
     def is_hungry(self):
-        return True if self.hunger > 0 else False
+        return self.hunger > 0
 
     def eat(self):
         self.hunger -= 1

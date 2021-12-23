@@ -1,11 +1,9 @@
-from entities import user
 from firebase import firebase
-from entities.user import User
 
 
 class UserRepository:
     def __init__(self, validator, user):
-        self.db = firebase.FirebaseApplication(
+        self.database = firebase.FirebaseApplication(
             "https://gachapet-77d0f-default-rtdb.europe-west1.firebasedatabase.app/",
             None,
         )
@@ -13,18 +11,18 @@ class UserRepository:
         self.validator = validator
 
     def _put(self, name, user):
-        self.db.post(f"/users/{name}", user)
+        self.database.post(f"/users/{name}", user)
 
     def _delete(self, name):
-        self.db.delete("/users/", name)
+        self.database.delete("/users/", name)
 
     def _get_user(self, username):
-        user = self.db.get(f"/users/{username}", None)
+        user = self.database.get(f"/users/{username}", None)
         return user
 
     def _user_exists(self, username):
         result = self._get_user(username)
-        return True if result != None else False
+        return True if result is not None else False
 
     def login(self, username, password):
         if self.validator.validate_string(username) and self.validator.validate_string(

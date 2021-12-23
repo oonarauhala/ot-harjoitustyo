@@ -9,24 +9,19 @@ class App:
         display_manager,
         item_machine,
         hunger_generator,
-        login_username_input_box,
-        login_password_input_box,
-        register_username_input_box,
-        register_password_input_box,
-        register_password_again_input_box,
-        pet_name_box,
+        input_boxes,
         login_button,
         register_button,
         to_login_button,
         to_register_button,
         continue_button,
     ):
-        self.login_username_input_box = login_username_input_box
-        self.login_password_input_box = login_password_input_box
-        self.register_username_input_box = register_username_input_box
-        self.register_password_input_box = register_password_input_box
-        self.register_password_again_input_box = register_password_again_input_box
-        self.pet_name_box = pet_name_box
+        self.login_username_input_box = input_boxes[0]
+        self.login_password_input_box = input_boxes[1]
+        self.register_username_input_box = input_boxes[2]
+        self.register_password_input_box = input_boxes[3]
+        self.register_password_again_input_box = input_boxes[4]
+        self.pet_name_box = input_boxes[5]
         self.login_button = login_button
         self.register_button = register_button
         self.to_login_button = to_login_button
@@ -80,7 +75,7 @@ class App:
                 try:
                     if self.sprites[4].rect.collidepoint(position):
                         self.logout()
-                except:
+                except RuntimeError:
                     pass
 
     def _handle_view_2(self):
