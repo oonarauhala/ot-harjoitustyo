@@ -1,7 +1,5 @@
 import unittest
-from unittest.mock import Mock
 from entities.pet import Pet
-from entities.user import User
 
 
 class TestPet(unittest.TestCase):

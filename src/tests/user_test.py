@@ -5,26 +5,22 @@ from entities.pet import Pet
 
 class TestUser(unittest.TestCase):
     def setUp(self):
-        self.user = User()
-
-    def test_init(self):
-        self.assertEqual(self.user.food, 5)
-        self.assertEqual(self.user.money, 5)
+        self.pet = Pet()
+        self.pet.set_data("Pottu", "dog", 3)
+        self.user = User(self.pet)
+        self.user.set_user_data("Nipsu", "aaaa", {"food": 5, "money": 5})
 
     def test_successful_feeding_pet_decreases_pet_hunger(self):
-        pet = Pet("Pottu", "dog")
-        self.user.feed_pet(pet)
-        self.assertEqual(pet.hunger, 2)
+        self.user.feed_pet(self.pet)
+        self.assertEqual(self.pet.hunger, 2)
 
     def test_successful_feeding_pet_decreases_food(self):
-        pet = Pet("Pottu", "dog")
-        self.user.feed_pet(pet)
+        self.user.feed_pet(self.pet)
         self.assertEqual(self.user.food, 4)
 
     def pet_not_hungry_feeding_doesnt_decrease_food(self):
-        pet = Pet("Pottu", "dog")
-        pet.hunger = 0
-        self.user.feed_pet(pet)
+        self.pet.hunger = 0
+        self.user.feed_pet(self.pet)
         self.assertEqual(self.user.food, 5)
 
     def test_recieve_food_increases_food(self):
