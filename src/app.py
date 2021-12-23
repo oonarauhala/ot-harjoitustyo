@@ -1,39 +1,41 @@
 import sys
 import pygame
-from ui.display_manager import DisplayManager
-from entities.item_machine import ItemMachine
-from entities.pet import Pet
-from ui.image_loader import ImageLoader
-from entities.hunger_generator import HungerGenerator
-from ui.input_box import InputBox
-from ui.button import Button
-
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
 
 
 class App:
-    def __init__(self, user_repository):
-        pygame.init()
-        pygame.key.set_repeat(200, 25)
-        resolution = (450, 840)
-        self.login_username_input_box = InputBox(130, 200, 200, 40)
-        self.login_password_input_box = InputBox(130, 300, 200, 40)
-        self.register_username_input_box = InputBox(130, 200, 200, 40)
-        self.register_password_input_box = InputBox(130, 300, 200, 40)
-        self.register_password_again_input_box = InputBox(130, 400, 200, 40)
-        self.pet_name_box = InputBox(130, 200, 200, 40)
-        self.login_button = Button("Login", 200, 400, BLACK, WHITE)
-        self.register_button = Button("Register", 200, 500, BLACK, WHITE)
-        self.to_login_button = Button("Login", 200, 600, BLACK, WHITE)
-        self.to_register_button = Button("Register", 200, 500, BLACK, WHITE)
-        self.continue_button = Button("Continue", 200, 300, BLACK, WHITE)
-        self.display_manager = DisplayManager(
-            pygame.display.set_mode(resolution), ImageLoader()
-        )
-        self.item_machine = ItemMachine()
+    def __init__(
+        self,
+        user_repository,
+        display_manager,
+        item_machine,
+        hunger_generator,
+        login_username_input_box,
+        login_password_input_box,
+        register_username_input_box,
+        register_password_input_box,
+        register_password_again_input_box,
+        pet_name_box,
+        login_button,
+        register_button,
+        to_login_button,
+        to_register_button,
+        continue_button,
+    ):
+        self.login_username_input_box = login_username_input_box
+        self.login_password_input_box = login_password_input_box
+        self.register_username_input_box = register_username_input_box
+        self.register_password_input_box = register_password_input_box
+        self.register_password_again_input_box = register_password_again_input_box
+        self.pet_name_box = pet_name_box
+        self.login_button = login_button
+        self.register_button = register_button
+        self.to_login_button = to_login_button
+        self.to_register_button = to_register_button
+        self.continue_button = continue_button
+        self.display_manager = display_manager
+        self.item_machine = item_machine
         self.clock = pygame.time.Clock()
-        self.hunger_generator = HungerGenerator()
+        self.hunger_generator = hunger_generator
         self.sprites = []
         self.user_repository = user_repository
         self.view = 0
