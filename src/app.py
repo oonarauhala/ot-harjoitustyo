@@ -1,12 +1,12 @@
 import sys
 import pygame
-from entities.display_manager import DisplayManager
+from ui.display_manager import DisplayManager
 from entities.item_machine import ItemMachine
 from entities.pet import Pet
-from entities.image_loader import ImageLoader
+from ui.image_loader import ImageLoader
 from entities.hunger_generator import HungerGenerator
-from entities.input_box import InputBox
-from entities.button import Button
+from ui.input_box import InputBox
+from ui.button import Button
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)

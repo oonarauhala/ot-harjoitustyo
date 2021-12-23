@@ -1,6 +1,6 @@
 import unittest
 from pygame import Surface
-from entities.image_loader import ImageLoader
+from ui.image_loader import ImageLoader
 
 
 class TestImageLoader(unittest.TestCase):
