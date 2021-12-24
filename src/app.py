@@ -94,7 +94,7 @@ class App:
                 try:
                     if self.sprites[4].rect.collidepoint(position):
                         self._logout()
-                except RuntimeError:
+                except:
                     pass
 
     def _handle_view_2(self):
