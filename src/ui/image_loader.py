@@ -16,7 +16,15 @@ VIEW_2_IMAGES = [
 
 
 class ImageLoader:
+    """A class for looading pygame images."""
+
     def load_view_images(self, view):
+        """A function for loading view images.
+
+        Args:
+            view: View number.
+
+        Returns: A list of loaded images."""
         loaded_images = []
         if view == 1:
             for url in VIEW_1_IMAGES:
@@ -27,7 +35,15 @@ class ImageLoader:
         return loaded_images
 
     def load_background(self):
+        """A function for loading main game background image.
+
+        Returns: Loaded background image.
+        """
         return pygame.image.load("src/media/garden.png")
 
     def load_logo(self):
+        """A function for loading application logo.
+
+        Returns: Loaded logo image.
+        """
         return pygame.image.load("src/media/logo.png")

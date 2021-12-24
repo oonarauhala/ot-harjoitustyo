@@ -3,6 +3,22 @@ import pygame
 
 
 class App:
+    """A class for main application loop. Detects all user interaction and
+    delegates them to right objects.
+
+    Attributes:
+            user_repository: An object that holds all user data.
+            display_manager: An object that handles ui display.
+            item_machine: Generates random items.
+            hunger_generator: Generates pet hunger randomly.
+            *_box: box For user inputs.
+            *_button: Button for user ineraction.
+            clock: Game clock.
+            sprites: A list of game sprites.
+            view: Number of current view.
+            *_error: Holds information about current view error occurance.
+    """
+
     def __init__(
         self,
         user_repository,
@@ -39,7 +55,10 @@ class App:
         self.pet_name_error = False
 
     def run(self):
-        self.change_view(3)
+        """Main loop function. Checks current vien and acts accordingly.
+        Initiates hunger generation.
+        """
+        self._change_view(3)
         while True:
             if self.view == 1:
                 self._handle_view_1()
@@ -68,13 +87,13 @@ class App:
                 # Click pet sprite
                 if self.sprites[0].rect.collidepoint(position):
                     if self.user_repository.user.pet.is_hungry():
-                        self.feed_pet()
+                        self._feed_pet()
                 # Click gacha button
                 if self.sprites[1].rect.collidepoint(position):
-                    self.change_view(2)
+                    self._change_view(2)
                 try:
                     if self.sprites[4].rect.collidepoint(position):
-                        self.logout()
+                        self._logout()
                 except RuntimeError:
                     pass
 
@@ -86,10 +105,10 @@ class App:
                 position = event.pos
                 # Click gacha
                 if self.sprites[0].rect.collidepoint(position):
-                    self.play_gacha()
+                    self._play_gacha()
                 # Click arrow
                 if self.sprites[1].rect.collidepoint(position):
-                    self.change_view(1)
+                    self._change_view(1)
 
     def _handle_view_3(self):
         if not self.login_error:
@@ -119,7 +138,7 @@ class App:
                     username = self.login_username_input_box.get_text()
                     password = self.login_password_input_box.get_text()
                     if self.user_repository.login(username, password):
-                        self.change_view(1)
+                        self._change_view(1)
                     else:
                         self.login_error = True
                         self.display_manager.update_view_3_with_error(
@@ -130,7 +149,7 @@ class App:
                         )
                 # Click register button
                 elif self.to_register_button.get_rect().collidepoint(position):
-                    self.change_view(4)
+                    self._change_view(4)
 
     def _handle_view_4(self):
         if not self.register_error:
@@ -163,7 +182,7 @@ class App:
                     password_again = self.register_password_again_input_box.get_text()
                     if password == password_again:
                         if self.user_repository.register(username, password):
-                            self.change_view(5)
+                            self._change_view(5)
                         else:
                             self.register_error = True
                             self.display_manager.update_view_4_with_error(
@@ -183,7 +202,7 @@ class App:
                             self.to_login_button,
                         )
                 if self.to_login_button.get_rect().collidepoint(position):
-                    self.change_view(3)
+                    self._change_view(3)
 
     def _handle_view_5(self):
         if not self.pet_name_error:
@@ -202,20 +221,20 @@ class App:
                     pet_name = self.pet_name_box.get_text()
                     if len(pet_name) > 1:
                         self.user_repository.complete_registration(pet_name)
-                        self.change_view(1)
+                        self._change_view(1)
                     else:
                         self.pet_name_error = True
                         self.display_manager.update_view_5_with_error(
                             self.pet_name_box, self.continue_button
                         )
 
-    def feed_pet(self):
+    def _feed_pet(self):
         self.user_repository.user.feed_pet(self.user_repository.user.pet)
         self.display_manager.update_view_1(
             self.user_repository.user, self.user_repository.user.pet
         )
 
-    def play_gacha(self):
+    def _play_gacha(self):
         if self.user_repository.user.pay():
             item = self.item_machine.generate_item()
             self.user_repository.user.recieve_item(item)
@@ -227,12 +246,12 @@ class App:
                 self.user_repository.user
             )
 
-    def logout(self):
+    def _logout(self):
         self.user_repository.logout()
         self._reset_input_boxes()
-        self.change_view(3)
+        self._change_view(3)
 
-    def change_view(self, view):
+    def _change_view(self, view):
         self._reset_input_boxes()
         self._kill_all_sprites()
         if view == 1:
