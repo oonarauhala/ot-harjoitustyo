@@ -43,7 +43,6 @@ class UserRepository:
         ):
             if not self._user_exists(username):
                 items = {"food": 5, "money": 5}
-                # self._put(username, user_data)
                 self.user.set_user_data(username, password, items)
                 return True
         return False
