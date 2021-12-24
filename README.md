@@ -9,6 +9,7 @@ GachaPet on hauska virtuaalilemmikkipeli, jossa pelaaja voi hankkia lemmikilleen
 * [Vaatimusmäärittely](https://github.com/oonarauhala/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
 * [Työaikakirjanpito](https://github.com/oonarauhala/ot-harjoitustyo/blob/master/dokumentaatio/ty%C3%B6aikakirjanpito.md)
 * [Arkkitehtuuri](https://github.com/oonarauhala/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
+* [Käyttöohje](https://github.com/oonarauhala/ot-harjoitustyo/blob/master/dokumentaatio/k%C3%A4ytt%C3%B6ohje.md)
 
 ## Asennus
 * Asenna riippuvuudet: poetry install
