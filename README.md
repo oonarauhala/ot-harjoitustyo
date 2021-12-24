@@ -3,7 +3,7 @@ GachaPet on hauska virtuaalilemmikkipeli, jossa pelaaja voi hankkia lemmikilleen
 
 ## Releaset
 [Release viikko 5](https://github.com/oonarauhala/ot-harjoitustyo/releases/tag/viikko5)  
-[Release viikko 6](https://github.com/oonarauhala/ot-harjoitustyo/releases/tag/viikko6)
+[Release viikko 6](https://github.com/oonarauhala/ot-harjoitustyo/releases/tag/viikko6)  
 [Loppupalautus](https://github.com/oonarauhala/ot-harjoitustyo/releases/tag/loppupalautus)
 
 ## Dokumentaatio
